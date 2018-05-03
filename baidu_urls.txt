@@ -1,3 +1,6 @@
+http://writinglife.vip/2018/05/03/剑指-树/
+http://writinglife.vip/2018/05/02/剑指-回溯法/
+http://writinglife.vip/2018/05/01/剑指offer-链表/
 http://writinglife.vip/2018/03/03/从尾到头打印链表/
 http://writinglife.vip/2018/03/03/替换空格/
 http://writinglife.vip/2018/03/03/二维数组的查找/
