@@ -1,3 +1,4 @@
+http://writinglife.vip/2018/08/03/对Java平台的理解/
 http://writinglife.vip/2018/05/03/剑指-树/
 http://writinglife.vip/2018/05/02/剑指-回溯法/
 http://writinglife.vip/2018/05/01/剑指offer-链表/

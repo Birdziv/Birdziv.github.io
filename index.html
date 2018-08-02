@@ -320,6 +320,236 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/08/03/对Java平台的理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="仓颉Ziv">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/axin.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仓颉Ziv">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/03/对Java平台的理解/" itemprop="url">Java核心技术36讲——第1讲 | 谈谈对Java平台的理解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-03T21:38:26+08:00">
+                2018-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,210
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+	
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###Java核心技术36讲——第1讲 | 谈谈对Java平台的理解</p>
+<ul>
+<li>宏观上<br>宏观上看，Java平台显著的几个方面有：<ul>
+<li>Java面向对象，以及三大特性：封装、继承、多态；</li>
+<li>Java语言的特性，包括泛型、Lombda表达式等；</li>
+<li>Java一些类包，包括集合、IO/NIO，并发，网络等；</li>
+<li>Java跨平台特性：write onece, run anywhere;</li>
+<li>Java的GC</li>
+<li>……</li>
+</ul>
+</li>
+<li>微观上<br>是对宏观各个点的展开，其实上面的每一个点都有对应的很多小知识点。实际上这个问题本来就是一个很笼统的问题，主要想让自己从一个比较系统的角度去思考Java平台，先系统，再深入。<br>首先明确几个概念：<ul>
+<li>JRE：JRE（Java Runtime Environment），即Java运行环境，包含了JVM和Java类库，以及一些模块等；</li>
+<li>JDK：JDK（Java Development Kit），可以看做是一个JRE的超集，提供了更多工具，如编译器，诊断工具等。</li>
+<li>JVM： Java虚拟机</li>
+</ul>
+</li>
+</ul>
+<p>JVM是Java语言得以跨平台执行的基础，Java跨平台并不真的是Java语言可以跨平台，而是因为JVM屏蔽了操作系统和硬件对语言造成的干扰，可以理解为一种解耦合的思想。以前语言（C++/C）在编码时需要考虑到操作系统和硬件等问题，而Java是运行在JVM上的，JVM与操作系统有关，而Java语言可以与操作系统实现解耦了。</p>
+<ul>
+<li>Java是解释执行吗？<br>这句话并不准确。程序从源代码到运行的三个阶段：编码–编译–运行–调试。Java分为编译期和运行时，Java程序从编码到运行的过程是这样：<ul>
+<li>编译：Javac将Java源码编译成.class文件，也就是字节码，字节码是可以在JVM上到处运行的文件，也即实现了Java的跨平台。实际上从这里也可以看出来，JVM上运行的是字节码文件，所以其它语言，如果能编译成字节码文件，在符合JVM执行规范的前提下，也是可以在JVM上运行的。</li>
+<li>运行：运行分为多种情况，包括解释执行和编译执行，这些运行模式，可以在Java虚拟机启动时，通过指定不同的参数进行选择。<ol>
+<li>解释执行：指定运行参数为”-Xint”，此时解释器（Interpreter）是逐条读入，逐条解释，运行代码。解释器的工作理解为，逐条读入字节码，解释为机器码，再执行机器码，机器码不做保存。这些程序员并不能感知到（像第一次编译是可以得到.class文件的，而这次是直接得到结果）</li>
+<li>编译执行：指定运行参数为”-Xcomp”，此时JVN关闭解释器，不做解释执行，只做编译执行，结果是会导致JVM启动变慢很多。同时有些JIT编译器的优化方式，比如分支预测，如果不进行profiling，往往不能进行有效优化。</li>
+<li>混合模式：指定运行参数为”-Xmixed”，JDK8实际上就是解释和编译混合的一种模式。这里会用到JIT（Just In Time）动态编译器。JVM会对利用JIT对热点代码（编译好的字节码）进行编译，将编译的结果保存为机器码文件（看作是缓存），这样下次再遇到热点代码时，直接执行编译好的机器码文件，而不用再次进行编译执行。这样做的理由是，根据“二八定律”—消耗大部分系统资源的只有那一小部分的热点代码。</li>
+<li>AOT（Ahead of Time Complication），JDK9支持的，它是直接将字节码变异成机器码，这样就避免了JIT预热等各方面的开销。JDK支持AOT和分层编译协作使用，二者并不是二选一的关系</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>其实好像编译执行之于混合模式就像AOT之于JIT，两对并不是从一个层面进行阐述的，对于JIT，它是方法级别的。<br>有这样一些有趣的类比：</p>
+<ol>
+<li>解释执行是“同声传译”，编译执行是“放录”</li>
+<li>写个程序直接执行字节码就是解释执行；运行时把字节码动态翻译成机器码就是JIT；把Java源代码直接翻译成机器码就是AOT。</li>
+</ol>
+<ul>
+<li>扩展<br>能够扩展的地方还有很多，比如类加载过程，类加载器的种类，常见的垃圾收集器等，但无法在一篇文章中总结的很细致。本文的重点<ul>
+<li>对Java平台有个系统性的概念和认识</li>
+<li>对Java从编译到执行有具体的认识，掌握解释执行和编译执行，JIT,AOT等</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/05/03/剑指-树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2039,198 +2269,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2017/09/12/Wallflower/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="仓颉Ziv">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/axin.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="仓颉Ziv">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/12/Wallflower/" itemprop="url">壁花少年（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-12T21:28:24+08:00">
-                2017-09-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/写作/" itemprop="url" rel="index">
-                    <span itemprop="name">写作</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/写作/壁花少年译/" itemprop="url" rel="index">
-                    <span itemprop="name">壁花少年译</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2,336
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-	
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>&emsp;&emsp;最近看了一部青春文艺电影 “The Perks of Being a Wallflower” ，中文译作《壁花少年》。”wallflower”的意思是“舞会、聚会中坐在角落，无人问津的孩子”，指害羞而孤独的人。深深被电影中的配乐以及情节所吸引。于是我找来了英文原著，希望把小说读一遍，随之萌生了将其翻译成中文的想法。<br>&emsp;&emsp;翻译的过程中遇到了一些小困难，幸有英语大神 Vero 提出宝贵建议，在此鸣谢！<br>&emsp;&emsp;<a href="http://pan.baidu.com/s/1c1OKADa" target="_blank" rel="external">点此下载英文原著pdf版</a></p>
-<div align="center"><br><img src="http://ovrlh76oe.bkt.clouddn.com/%E5%B0%81%E9%9D%A2.jpg" width="306" height="213"><br></div>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/12/Wallflower/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2284,7 +2322,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2295,7 +2333,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2306,7 +2344,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2414,7 +2452,7 @@ var _hmt = _hmt || [];
 </script>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">我共写了12.3k字</span>
+  <span class="post-count">我共写了13.5k字</span>
 </div>
 
 

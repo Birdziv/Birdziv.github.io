@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://writinglife.vip/"/>
-  <updated>2018-05-03T14:34:47.076Z</updated>
+  <updated>2018-08-02T16:10:32.563Z</updated>
   <id>http://writinglife.vip/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java核心技术36讲——第1讲 | 谈谈对Java平台的理解</title>
+    <link href="http://writinglife.vip/2018/08/03/%E5%AF%B9Java%E5%B9%B3%E5%8F%B0%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>http://writinglife.vip/2018/08/03/对Java平台的理解/</id>
+    <published>2018-08-03T13:38:26.000Z</published>
+    <updated>2018-08-02T16:10:32.563Z</updated>
+    
+    <content type="html"><![CDATA[<p>###Java核心技术36讲——第1讲 | 谈谈对Java平台的理解</p><ul><li>宏观上<br>宏观上看，Java平台显著的几个方面有：<ul><li>Java面向对象，以及三大特性：封装、继承、多态；</li><li>Java语言的特性，包括泛型、Lombda表达式等；</li><li>Java一些类包，包括集合、IO/NIO，并发，网络等；</li><li>Java跨平台特性：write onece, run anywhere;</li><li>Java的GC</li><li>……</li></ul></li><li>微观上<br>是对宏观各个点的展开，其实上面的每一个点都有对应的很多小知识点。实际上这个问题本来就是一个很笼统的问题，主要想让自己从一个比较系统的角度去思考Java平台，先系统，再深入。<br>首先明确几个概念：<ul><li>JRE：JRE（Java Runtime Environment），即Java运行环境，包含了JVM和Java类库，以及一些模块等；</li><li>JDK：JDK（Java Development Kit），可以看做是一个JRE的超集，提供了更多工具，如编译器，诊断工具等。</li><li>JVM： Java虚拟机</li></ul></li></ul><p>JVM是Java语言得以跨平台执行的基础，Java跨平台并不真的是Java语言可以跨平台，而是因为JVM屏蔽了操作系统和硬件对语言造成的干扰，可以理解为一种解耦合的思想。以前语言（C++/C）在编码时需要考虑到操作系统和硬件等问题，而Java是运行在JVM上的，JVM与操作系统有关，而Java语言可以与操作系统实现解耦了。</p><ul><li>Java是解释执行吗？<br>这句话并不准确。程序从源代码到运行的三个阶段：编码–编译–运行–调试。Java分为编译期和运行时，Java程序从编码到运行的过程是这样：<ul><li>编译：Javac将Java源码编译成.class文件，也就是字节码，字节码是可以在JVM上到处运行的文件，也即实现了Java的跨平台。实际上从这里也可以看出来，JVM上运行的是字节码文件，所以其它语言，如果能编译成字节码文件，在符合JVM执行规范的前提下，也是可以在JVM上运行的。</li><li>运行：运行分为多种情况，包括解释执行和编译执行，这些运行模式，可以在Java虚拟机启动时，通过指定不同的参数进行选择。<ol><li>解释执行：指定运行参数为”-Xint”，此时解释器（Interpreter）是逐条读入，逐条解释，运行代码。解释器的工作理解为，逐条读入字节码，解释为机器码，再执行机器码，机器码不做保存。这些程序员并不能感知到（像第一次编译是可以得到.class文件的，而这次是直接得到结果）</li><li>编译执行：指定运行参数为”-Xcomp”，此时JVN关闭解释器，不做解释执行，只做编译执行，结果是会导致JVM启动变慢很多。同时有些JIT编译器的优化方式，比如分支预测，如果不进行profiling，往往不能进行有效优化。</li><li>混合模式：指定运行参数为”-Xmixed”，JDK8实际上就是解释和编译混合的一种模式。这里会用到JIT（Just In Time）动态编译器。JVM会对利用JIT对热点代码（编译好的字节码）进行编译，将编译的结果保存为机器码文件（看作是缓存），这样下次再遇到热点代码时，直接执行编译好的机器码文件，而不用再次进行编译执行。这样做的理由是，根据“二八定律”—消耗大部分系统资源的只有那一小部分的热点代码。</li><li>AOT（Ahead of Time Complication），JDK9支持的，它是直接将字节码变异成机器码，这样就避免了JIT预热等各方面的开销。JDK支持AOT和分层编译协作使用，二者并不是二选一的关系</li></ol></li></ul></li></ul><p>其实好像编译执行之于混合模式就像AOT之于JIT，两对并不是从一个层面进行阐述的，对于JIT，它是方法级别的。<br>有这样一些有趣的类比：</p><ol><li>解释执行是“同声传译”，编译执行是“放录”</li><li>写个程序直接执行字节码就是解释执行；运行时把字节码动态翻译成机器码就是JIT；把Java源代码直接翻译成机器码就是AOT。</li></ol><ul><li>扩展<br>能够扩展的地方还有很多，比如类加载过程，类加载器的种类，常见的垃圾收集器等，但无法在一篇文章中总结的很细致。本文的重点<ul><li>对Java平台有个系统性的概念和认识</li><li>对Java从编译到执行有具体的认识，掌握解释执行和编译执行，JIT,AOT等</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;###Java核心技术36讲——第1讲 | 谈谈对Java平台的理解&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;宏观上&lt;br&gt;宏观上看，Java平台显著的几个方面有：&lt;ul&gt;
+&lt;li&gt;Java面向对象，以及三大特性：封装、继承、多态；&lt;/li&gt;
+&lt;li&gt;Java语言的特性，包括泛型、Lom
+      
+    
+    </summary>
+    
+      <category term="学习" scheme="http://writinglife.vip/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Java" scheme="http://writinglife.vip/categories/%E5%AD%A6%E4%B9%A0/Java/"/>
+    
+    
+      <category term="Java核心技术36讲" scheme="http://writinglife.vip/tags/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF36%E8%AE%B2/"/>
+    
+  </entry>
   
   <entry>
     <title>树面试题</title>
