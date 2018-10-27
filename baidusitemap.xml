@@ -4,8 +4,31 @@
 
     
   <url>
-    <loc>http://writinglife.vip/2018/10/24/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2018-10-24T13:16:03.526Z</lastmod>
+    <loc>http://writinglife.vip/2018/10/27/go%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E7%AF%87/</loc>
+    <lastmod>2018-10-27T03:27:22.558Z</lastmod>
+    <data>
+        <display>
+        <title>Go语言之基本语法篇</title>
+        <pubTime>2018-10-27T03:15:00.000Z</pubTime>
+        
+        <tag>Go编程</tag>
+         
+         
+           
+             
+              <breadCrumb title="学习" url="http://writinglife.vip/categories/%E5%AD%A6%E4%B9%A0/"/>
+          
+             
+              <breadCrumb title="编程" url="http://writinglife.vip/categories/%E5%AD%A6%E4%B9%A0/%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://writinglife.vip/2018/10/24/Java%E6%BA%90%E7%A0%81/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-10-25T14:40:33.704Z</lastmod>
     <data>
         <display>
         <title>设计模式之迭代器模式</title>
@@ -27,7 +50,7 @@
 
     
   <url>
-    <loc>http://writinglife.vip/2018/10/03/%E5%88%97%E8%A1%A8%E6%95%B0%E7%BB%84/</loc>
+    <loc>http://writinglife.vip/2018/10/03/Java%E6%BA%90%E7%A0%81/%E5%88%97%E8%A1%A8%E6%95%B0%E7%BB%84/</loc>
     <lastmod>2018-10-23T04:48:44.276Z</lastmod>
     <data>
         <display>
@@ -96,7 +119,7 @@
 
     
   <url>
-    <loc>http://writinglife.vip/2018/05/03/%E5%89%91%E6%8C%87-%E6%A0%91/</loc>
+    <loc>http://writinglife.vip/2018/05/03/%E7%AE%97%E6%B3%95%E9%A2%98/%E5%89%91%E6%8C%87-%E6%A0%91/</loc>
     <lastmod>2018-05-03T14:34:47.076Z</lastmod>
     <data>
         <display>
@@ -119,7 +142,7 @@
 
     
   <url>
-    <loc>http://writinglife.vip/2018/05/02/%E5%89%91%E6%8C%87-%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
+    <loc>http://writinglife.vip/2018/05/02/%E7%AE%97%E6%B3%95%E9%A2%98/%E5%89%91%E6%8C%87-%E5%9B%9E%E6%BA%AF%E6%B3%95/</loc>
     <lastmod>2018-05-03T14:34:26.622Z</lastmod>
     <data>
         <display>
@@ -142,7 +165,7 @@
 
     
   <url>
-    <loc>http://writinglife.vip/2018/05/01/%E5%89%91%E6%8C%87offer-%E9%93%BE%E8%A1%A8/</loc>
+    <loc>http://writinglife.vip/2018/05/01/%E7%AE%97%E6%B3%95%E9%A2%98/%E5%89%91%E6%8C%87offer-%E9%93%BE%E8%A1%A8/</loc>
     <lastmod>2018-05-03T14:33:10.597Z</lastmod>
     <data>
         <display>
@@ -165,7 +188,7 @@
 
     
   <url>
-    <loc>http://writinglife.vip/2018/03/03/%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC/</loc>
+    <loc>http://writinglife.vip/2018/03/03/%E7%AE%97%E6%B3%95%E9%A2%98/%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC/</loc>
     <lastmod>2018-03-03T07:11:46.426Z</lastmod>
     <data>
         <display>
@@ -188,7 +211,7 @@
 
     
   <url>
-    <loc>http://writinglife.vip/2018/03/03/%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8/</loc>
+    <loc>http://writinglife.vip/2018/03/03/%E7%AE%97%E6%B3%95%E9%A2%98/%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8/</loc>
     <lastmod>2018-03-03T07:11:10.089Z</lastmod>
     <data>
         <display>
@@ -259,7 +282,7 @@
 
     
   <url>
-    <loc>http://writinglife.vip/2017/12/12/Coursera%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E5%91%A8%E4%BD%9C%E4%B8%9A/</loc>
+    <loc>http://writinglife.vip/2017/12/12/%E7%AE%97%E6%B3%95%E9%A2%98/Coursera%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E5%91%A8%E4%BD%9C%E4%B8%9A/</loc>
     <lastmod>2017-12-13T05:43:13.896Z</lastmod>
     <data>
         <display>
@@ -282,7 +305,7 @@
 
     
   <url>
-    <loc>http://writinglife.vip/2017/09/13/wallflower02-0/</loc>
+    <loc>http://writinglife.vip/2017/09/13/%E9%98%85%E8%AF%BB/wallflower02-0/</loc>
     <lastmod>2017-09-13T15:38:37.380Z</lastmod>
     <data>
         <display>
@@ -307,7 +330,7 @@
 
     
   <url>
-    <loc>http://writinglife.vip/2017/09/12/Wallflower/</loc>
+    <loc>http://writinglife.vip/2017/09/12/%E9%98%85%E8%AF%BB/Wallflower/</loc>
     <lastmod>2017-09-12T14:40:16.713Z</lastmod>
     <data>
         <display>

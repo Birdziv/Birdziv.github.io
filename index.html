@@ -320,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/10/24/迭代器模式/">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/10/27/go语言学习/基本语法篇/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="仓颉Ziv">
@@ -339,7 +339,229 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/24/迭代器模式/" itemprop="url">设计模式之迭代器模式</a></h1>
+                <a class="post-title-link" href="/2018/10/27/go语言学习/基本语法篇/" itemprop="url">Go语言之基本语法篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T11:15:00+08:00">
+                2018-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,630
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+	
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Go语言之基本语法篇"><a href="#Go语言之基本语法篇" class="headerlink" title="Go语言之基本语法篇"></a>Go语言之基本语法篇</h2><h4 id="一、变量定义"><a href="#一、变量定义" class="headerlink" title="一、变量定义"></a>一、变量定义</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">在函数外也可以定义变量，但是此时不能使用":="定义变量</span></div><div class="line"><span class="comment">此时该变量是”包变量“，注意go中没有”全局变量“的说法</span></div><div class="line"><span class="comment">包变量在下面的函数中也是可以使用的</span></div><div class="line"><span class="comment"> */</span></div><div class="line"> <span class="comment">/*var aa = 6</span></div><div class="line"><span class="comment"> var ss = "kkk"</span></div><div class="line"><span class="comment"> var bb = true*/</span></div><div class="line"> <span class="comment">//将以上变量定义语句简化为：</span></div><div class="line"> var(</div><div class="line">	 aa = <span class="number">6</span></div><div class="line">     ss = <span class="string">"kkk"</span></div><div class="line">     bb = <span class="keyword">true</span></div><div class="line"> )</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">定义空值变量</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function">func <span class="title">variableZeroValue</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//变量定义：最前面用 var 声明，然后变量名字在类型前面</span></div><div class="line">	var a <span class="keyword">int</span></div><div class="line">	var s string</div><div class="line">	<span class="comment">//fmt是一个函数库</span></div><div class="line">	fmt.Printf(<span class="string">"%d  %q\n"</span>,a,s)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">定义有初始值的变量</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function">func <span class="title">variableInitValue</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="comment">//注意这种赋值的格式</span></div><div class="line">	var a, b <span class="keyword">int</span> = <span class="number">3</span>, <span class="number">4</span></div><div class="line">	var s string = <span class="string">"abc"</span></div><div class="line">	fmt.Println(a, b, s, aa)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">类型自动识别</span></div><div class="line"><span class="comment"> */</span></div><div class="line"> <span class="function">func <span class="title">variableTypeDeduction</span><span class="params">()</span></span>&#123;</div><div class="line"> 	<span class="comment">//不同类型也可以放在一个语句中进行定义</span></div><div class="line"> 	<span class="comment">//如果规定了类型是不能写在一起的</span></div><div class="line">	 var a, b, c, s = <span class="number">3</span>, <span class="number">4</span>, <span class="keyword">true</span>, <span class="string">"def"</span></div><div class="line">	 fmt.Println(a, b, c, s)</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="comment">/**</span></div><div class="line"><span class="comment"> ":="用于定义变量，可以省略var</span></div><div class="line"><span class="comment"> 推荐这种</span></div><div class="line"><span class="comment">  */</span></div><div class="line">  <span class="function">func <span class="title">variableShorter</span><span class="params">()</span></span>&#123;</div><div class="line">  	a, b, c, s := <span class="number">3</span>, <span class="number">4</span>, <span class="keyword">true</span>, <span class="string">"def"</span></div><div class="line">  	<span class="comment">//而赋值时是不能使用":"的</span></div><div class="line">  	b = <span class="number">5</span></div><div class="line">  	fmt.Println(a, b, c, s)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line"><span class="comment">  演示强制类型转换</span></div><div class="line"><span class="comment">  可以看到每一个值都需要进行显示类型转换</span></div><div class="line"><span class="comment">   */</span></div><div class="line">   <span class="function">func <span class="title">triangle</span><span class="params">()</span></span>&#123;</div><div class="line">   	var a, b <span class="keyword">int</span> = <span class="number">3</span>, <span class="number">4</span></div><div class="line">   	var c <span class="keyword">int</span></div><div class="line">   	c = <span class="keyword">int</span>(math.Sqrt((float64(a*a + b*b))))</div><div class="line">   	fmt.Println(c)</div><div class="line">   &#125;</div><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	fmt.Println(<span class="string">"Hello World"</span>)</div><div class="line">	variableZeroValue()</div><div class="line">	variableInitValue()</div><div class="line">	variableTypeDeduction()</div><div class="line">	variableShorter()</div><div class="line">	triangle()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="二、內建变量类型"><a href="#二、內建变量类型" class="headerlink" title="二、內建变量类型"></a>二、內建变量类型</h4><ul>
+<li>bool, string<br>布尔型和字符串类型</li>
+<li>(u)int, (u)int8, (u)int16, (u)int32, (u)int64, uintptr<br>整数类型，加”u”表示无符号整数，否则为有符号整数；后面的数字表示长度，不规定长度的“int”就是根据操作系统来的。uintptr是指针,长度由操作系统决定</li>
+<li>byte, rune<br>byte占8字节，rune类比于“char”，长度为32位。</li>
+<li>float32, float64, complex64. complex128<br>浮点数类型，complex64和complex128表示复数。</li>
+</ul>
+<h4 id="三、强制类型转换"><a href="#三、强制类型转换" class="headerlink" title="三、强制类型转换"></a>三、强制类型转换</h4><p>go语言中类型转换都是强制的，即都是显示的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">演示强制类型转换</span></div><div class="line"><span class="comment">可以看到每一个值都需要进行显示类型转换</span></div><div class="line"><span class="comment"> */</span></div><div class="line"> <span class="function">func <span class="title">triangle</span><span class="params">()</span></span>&#123;</div><div class="line"> 	var a, b <span class="keyword">int</span> = <span class="number">3</span>, <span class="number">4</span></div><div class="line"> 	var c <span class="keyword">int</span></div><div class="line"> 	c = <span class="keyword">int</span>(math.Sqrt((float64(a*a + b*b))))</div><div class="line"> 	fmt.Println(c)</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<h4 id="四、常量定义"><a href="#四、常量定义" class="headerlink" title="四、常量定义"></a>四、常量定义</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line"><span class="comment">  常量定义演示：</span></div><div class="line"><span class="comment">  常量不用全部大写；</span></div><div class="line"><span class="comment">  常量类型数值可作为各种类型使用；</span></div><div class="line"><span class="comment">  常量一定要赋值。</span></div><div class="line"><span class="comment">   */</span></div><div class="line">   <span class="function">func <span class="title">consts</span><span class="params">()</span></span>&#123;</div><div class="line">   	<span class="keyword">const</span> a, b = <span class="number">3</span>, <span class="number">4</span></div><div class="line">   	var c <span class="keyword">int</span></div><div class="line">   	c = <span class="keyword">int</span>(math.Sqrt(a*a + b*b))<span class="comment">//常量不需要进行强制类型转换</span></div><div class="line">   	fmt.Println(c)</div><div class="line">&#125;</div><div class="line"></div><div class="line">   <span class="comment">/**</span></div><div class="line"><span class="comment">   利用常量做枚举</span></div><div class="line"><span class="comment">    */</span></div><div class="line">    <span class="function">func <span class="title">enums</span><span class="params">()</span></span>&#123;</div><div class="line">    	<span class="keyword">const</span>(</div><div class="line">    		cpp = iota <span class="comment">//iota表示自增值</span></div><div class="line">    		java</div><div class="line">    		python</div><div class="line">    		golang</div><div class="line">	)</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h4 id="五、常用语句"><a href="#五、常用语句" class="headerlink" title="五、常用语句"></a>五、常用语句</h4><h5 id="5-1-if"><a href="#5-1-if" class="headerlink" title="5.1 if"></a>5.1 if</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">if语句</span></div><div class="line"><span class="comment"> */</span></div><div class="line"> <span class="function">func <span class="title">showif</span><span class="params">()</span></span>&#123;</div><div class="line">   <span class="keyword">const</span> filename = <span class="string">"abc.txt"</span></div><div class="line">   <span class="comment">/*//ioutil是一个库函数，用于读取文件</span></div><div class="line"><span class="comment">   //go语言中一个函数可以有多个返回值，按顺序接受即可</span></div><div class="line"><span class="comment">   contents, err := ioutil.ReadFile(filename)</span></div><div class="line"><span class="comment">   if err != nil &#123;//nil就是null</span></div><div class="line"><span class="comment">      fmt.Println(err)</span></div><div class="line"><span class="comment">   &#125;else&#123;</span></div><div class="line"><span class="comment">      fmt.Printf("%s\n", contents)</span></div><div class="line"><span class="comment">   &#125;*/</span></div><div class="line">   <span class="comment">//改良版：</span></div><div class="line">   <span class="keyword">if</span> contents, err := ioutil.ReadFile(filename); err != nil &#123;</div><div class="line">      fmt.Println(err)</div><div class="line">   &#125;<span class="keyword">else</span> &#123;</div><div class="line">      fmt.Printf(<span class="string">"%s\n"</span>, contents)</div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>if的条件里可以赋值，新建变量，该变量的作用域只在if语句中</li>
+<li><p>if中可以进行语句复合，用“;”分割</p>
+<h5 id="5-2-switch"><a href="#5-2-switch" class="headerlink" title="5.2 switch"></a>5.2 switch</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> switch语句</span></div><div class="line"><span class="comment">  */</span></div><div class="line">  <span class="function">func <span class="title">showswitch</span><span class="params">(a, b <span class="keyword">int</span>, op string)</span> <span class="keyword">int</span> </span>&#123;</div><div class="line">  	var res <span class="keyword">int</span></div><div class="line">	  <span class="keyword">switch</span> op &#123;</div><div class="line">	  <span class="keyword">case</span> <span class="string">"+"</span>:</div><div class="line">	  	res = a + b</div><div class="line">	  <span class="keyword">case</span> <span class="string">"-"</span>:</div><div class="line">	  	res = a - b</div><div class="line">	  <span class="keyword">case</span> <span class="string">"*"</span>:</div><div class="line">	  	res = a * b</div><div class="line">	  <span class="keyword">case</span> <span class="string">"/"</span>:</div><div class="line">	  	res = a / b</div><div class="line">	  <span class="keyword">default</span>:</div><div class="line">		  panic(<span class="string">"不支持的运算符"</span> + op)</div><div class="line">	  &#125;</div><div class="line">  	<span class="keyword">return</span> res</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>switch会自动break，除非使用fallthrough</p>
+</li>
+<li>switch后面可以没有表达式，在case中计算</li>
+</ul>
+<h5 id="5-3-for"><a href="#5-3-for" class="headerlink" title="5.3 for"></a>5.3 for</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">/**</span></div><div class="line"><span class="comment"> for语句</span></div><div class="line"><span class="comment">  */</span></div><div class="line">  <span class="function">func <span class="title">showfor1</span><span class="params">()</span></span>&#123;</div><div class="line">  	sum := <span class="number">0</span></div><div class="line">  	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++ &#123;</div><div class="line">  		sum += i</div><div class="line">&#125;</div><div class="line">  	fmt.Println(sum)</div><div class="line">  &#125;</div><div class="line">  <span class="comment">//省略初始条件，相当于while，go中没有while</span></div><div class="line">  <span class="function">func <span class="title">showfor2</span><span class="params">(v <span class="keyword">int</span>)</span></span>&#123;</div><div class="line">  	res := <span class="string">""</span></div><div class="line">  	<span class="keyword">for</span> ; v &gt; <span class="number">0</span>; v /= <span class="number">2</span> &#123;</div><div class="line">  		<span class="comment">//strconv.Itoa(int i)将int 转换为 string</span></div><div class="line">  		res = strconv.Itoa(v%<span class="number">2</span>) + res</div><div class="line">&#125;</div><div class="line">  	fmt.Println(res)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">//省略一切，就是一个死循环</span></div><div class="line">  <span class="function">func <span class="title">showfor3</span><span class="params">()</span></span>&#123;</div><div class="line">  	<span class="keyword">for</span> &#123;</div><div class="line">  		fmt.Println(<span class="string">"abc"</span>)</div><div class="line">&#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h4 id="六、函数定义"><a href="#六、函数定义" class="headerlink" title="六、函数定义"></a>六、函数定义</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> switch语句</span></div><div class="line"><span class="comment">  */</span></div><div class="line">  <span class="function">func <span class="title">showswitch</span><span class="params">(a, b <span class="keyword">int</span>, op string)</span> <span class="keyword">int</span> </span>&#123;</div><div class="line">  	var res <span class="keyword">int</span></div><div class="line">	  <span class="keyword">switch</span> op &#123;</div><div class="line">	  <span class="keyword">case</span> <span class="string">"+"</span>:</div><div class="line">	  	res = a + b</div><div class="line">	  <span class="keyword">case</span> <span class="string">"-"</span>:</div><div class="line">	  	res = a - b</div><div class="line">	  <span class="keyword">case</span> <span class="string">"*"</span>:</div><div class="line">	  	res = a * b</div><div class="line">	  <span class="keyword">case</span> <span class="string">"/"</span>:</div><div class="line">	  	res = a / b</div><div class="line">	  <span class="keyword">default</span>:</div><div class="line">		  panic(<span class="string">"不支持的运算符"</span> + op)</div><div class="line">	  &#125;</div><div class="line">  	<span class="keyword">return</span> res</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>函数名在前，返回值类型在后<br>前面提到Go中的函数可以返回多个值，那多个值类型不同怎么做呢？</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">/**</span></div><div class="line"><span class="comment">   函数定义</span></div><div class="line"><span class="comment">还可以为返回值建立变量名，具体这里不演示了</span></div><div class="line"><span class="comment">    */</span></div><div class="line">    <span class="function">func <span class="title">div</span> <span class="params">(a, b <span class="keyword">int</span>)</span> <span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span> </span>&#123;</div><div class="line">    	<span class="keyword">return</span> a / b, a % b</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>当函数有多个返回值，但我只需要其中一个的时候，其他的返回值怎么处理呢？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">q, r := div(<span class="number">12</span>,<span class="number">5</span>)</div><div class="line">fmt.Println(q)</div></pre></td></tr></table></figure></p>
+<p>这样是不可以的，因为go中定义的变量一定要使用到，否则就是编译错误。此处的变量r没有使用到，因此不行。怎么解决呢？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">q, _ := div(<span class="number">12</span>,<span class="number">5</span>)</div><div class="line">fmt.Println(q)</div></pre></td></tr></table></figure></p>
+<h4 id="七、面向函数编程"><a href="#七、面向函数编程" class="headerlink" title="七、面向函数编程"></a>七、面向函数编程</h4><p>GO语言是一种面向函数编程的语言，体现在它的函数不仅可以用在函数体中，还可以用作函数的参数，返回值等。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">/**</span></div><div class="line"><span class="comment">   函数定义</span></div><div class="line"><span class="comment">   还可以为返回值建立变量名，具体这里不演示了</span></div><div class="line"><span class="comment">    */</span></div><div class="line">    <span class="function">func <span class="title">div</span> <span class="params">(a, b <span class="keyword">int</span>)</span> <span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span> </span>&#123;</div><div class="line">    	<span class="keyword">return</span> a / b, a % b</div><div class="line">	&#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">    函数作为另一函数的参数</span></div><div class="line"><span class="comment">     */</span></div><div class="line">     <span class="function">func <span class="title">apply</span><span class="params">(op func(<span class="keyword">int</span>, <span class="keyword">int</span>)</span> <span class="keyword">int</span>, a, b <span class="keyword">int</span>) <span class="keyword">int</span> </span>&#123;</div><div class="line">     	<span class="comment">//展示出调用的函数的名字</span></div><div class="line">     	p := reflect.ValueOf(op).Pointer()</div><div class="line">     	opName := runtime.FuncForPC(p).Name()</div><div class="line">     	fmt.Printf(<span class="string">"Calling function %s with args"</span> + <span class="string">"(%d, %d)\n"</span>, opName, a, b)</div><div class="line"></div><div class="line">     	<span class="keyword">return</span> op(a, b)</div><div class="line">	 &#125;</div><div class="line">     <span class="function">func <span class="title">pow</span><span class="params">(a, b <span class="keyword">int</span>)</span> <span class="keyword">int</span> </span>&#123;</div><div class="line">     	<span class="keyword">return</span> <span class="keyword">int</span>(math.Pow(float64(a), float64(b)))</div><div class="line">	 &#125;</div><div class="line">	 </div><div class="line">	 <span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	fmt.Println(apply(pow, <span class="number">2</span>,<span class="number">4</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>甚至直接定义在函数声明中，定义一个匿名函数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">fmt.Println(apply(func(a <span class="keyword">int</span>, b <span class="keyword">int</span>) <span class="keyword">int</span> &#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">int</span>(math.Pow(float64(a), float64(b)))</div><div class="line">&#125;, <span class="number">2</span>,<span class="number">4</span>))</div></pre></td></tr></table></figure></p>
+<p>Go中的函数没有函数重载，函数重写等，但是有一个可变参数列表的用法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	fmt.Println(sum(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>))</div><div class="line">&#125;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line"><span class="comment">     可变参数列表</span></div><div class="line"><span class="comment">      */</span></div><div class="line">      <span class="function">func <span class="title">sum</span><span class="params">(nums ...<span class="keyword">int</span>)</span> <span class="keyword">int</span> </span>&#123;</div><div class="line">      	s := <span class="number">0</span></div><div class="line">      	<span class="keyword">for</span> i := range nums &#123;</div><div class="line">      		s += nums[i]</div><div class="line">		&#125;</div><div class="line">      	<span class="keyword">return</span> s</div><div class="line">	  &#125;</div></pre></td></tr></table></figure></p>
+<h4 id="八、指针"><a href="#八、指针" class="headerlink" title="八、指针"></a>八、指针</h4><ul>
+<li>指针不能运算</li>
+<li>参数传递<br>Go语言只有值传递一种方式，但可以通过指针的方式实现引用传递的功能<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	var a <span class="keyword">int</span> = <span class="number">2</span></div><div class="line">	<span class="comment">//定义指针 *int; &amp; 表示取a的地址，即可以理解为指针就是一个变量的地址，即pa保存的是a的地址</span></div><div class="line">	var pa *<span class="keyword">int</span> = &amp;a</div><div class="line">	<span class="comment">//*pa就是取得pa保存的地址对应的变量的值</span></div><div class="line">	*pa = <span class="number">3</span></div><div class="line">	fmt.Println(a)</div><div class="line">	fmt.Println(*pa)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>指针实现交换两数的函数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">    指针</span></div><div class="line"><span class="comment">     */</span></div><div class="line">     <span class="function">func <span class="title">swap</span><span class="params">(a, b *<span class="keyword">int</span>)</span></span>&#123;</div><div class="line">     	<span class="comment">//a，b两指针指针互换，假设a和b不是指针，由于go中是值传递，所以函数内部</span></div><div class="line">     	<span class="comment">//即使进行了交换，也无法在外部实现真正的交换</span></div><div class="line">     	*a, *b = *b, *a</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/10/24/Java源码/迭代器模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="仓颉Ziv">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/axin.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仓颉Ziv">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/24/Java源码/迭代器模式/" itemprop="url">设计模式之迭代器模式</a></h1>
         
 
         <div class="post-meta">
@@ -416,7 +638,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,215
+                  1,580
                 </span>
               
 
@@ -432,7 +654,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  7
                 </span>
               
             </div>
@@ -473,6 +695,17 @@
 <li>listIterator(int index)：可以从指定位置返回迭代器</li>
 <li>ListItr extends Itr:继承自Itr，除了有Itr的hasNext()、next()等方法之外，还有previous()（前一个元素）、set()（为迭代器当前位置set值）、add()（在迭代器当前位置添加值）。</li>
 </ul>
+<h3 id="四、扩展"><a href="#四、扩展" class="headerlink" title="四、扩展"></a>四、扩展</h3><h4 id="4-1-Iterator和Enumeration"><a href="#4-1-Iterator和Enumeration" class="headerlink" title="4.1 Iterator和Enumeration"></a>4.1 Iterator和Enumeration</h4><p>== Enumeration的存在有什么意义？ ==<br>Iterator已经实现了对容器的遍历了，Enumeration的存在有什么意义呢？</p>
+<p>原因可能有很多种，个人了解有限，欢迎大家补充。<br>Enumeration在JDK 1.0就已经存在了，而Iterator是JDK 2.0新加的接口。为了依赖JDK1.0写的代码能够正常运行，Enumeration是不能删的。<br>== 相同点： ==<br>Iterator和Enumeration都可以对某些容器进行遍历。<br>Iterator和Enumeration都是接口。</p>
+<p>== 不同点： ==<br>Iterator有对容器进行修改的方法。而Enumeration只能遍历。<br>Iterator支持fail-fast，而Enumeration不支持。<br>Iterator比Enumeration覆盖范围广，基本所有容器中都有Iterator迭代器，而只有Vector、Hashtable有Enumeration。<br>Enumeration在JDK 1.0就已经存在了，而Iterator是JDK2.0新加的接口。</p>
+<p>== 例子 ==<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Enumeration;</div><div class="line"><span class="keyword">import</span> java.util.Vector;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItrOfVectorTest</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@org</span>.junit.Test</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">            Vector list = <span class="keyword">new</span> Vector&lt;&gt;();</div><div class="line">            list.add(<span class="string">"1"</span>);</div><div class="line">            list.add(<span class="string">"2"</span>);</div><div class="line">            list.add(<span class="string">"3"</span>);</div><div class="line">            list.add(<span class="string">"4"</span>);</div><div class="line">            Enumeration enu = list.elements();  </div><div class="line">            <span class="keyword">while</span> (enu.hasMoreElements()) &#123;  </div><div class="line">                System.out.println(enu.nextElement());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Enumeration方法</p>
+<ul>
+<li>elements()。vector.elements()用来从容器对象中返回vector中所有元素的Enumeration。</li>
+<li>hasMoreElements()。检查序列中向下是否还有元素。</li>
+<li>nextElement()。获取序列的下个元素</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 返回vector中所有元素的Enumeration。</span></div><div class="line"><span class="comment"> * </span></div><div class="line"><span class="comment"> * Enumeration提供用于遍历vector中所有元素的方法</span></div><div class="line"><span class="comment"> * </span></div><div class="line"><span class="comment"> * <span class="doctag">@return</span>  返回vector中所有元素的Enumeration。</span></div><div class="line"><span class="comment"> * <span class="doctag">@see</span>     Iterator</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> Enumeration&lt;E&gt; <span class="title">elements</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Enumeration&lt;E&gt;() &#123;</div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasMoreElements</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> count &lt; elementCount;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> E <span class="title">nextElement</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">synchronized</span> (Vector.<span class="keyword">this</span>) &#123;</div><div class="line">                <span class="keyword">if</span> (count &lt; elementCount) &#123;</div><div class="line">                    <span class="keyword">return</span> elementData(count++);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException(<span class="string">"Vector Enumeration"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -522,7 +755,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/10/03/列表数组/">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/10/03/Java源码/列表数组/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="仓颉Ziv">
@@ -541,7 +774,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/03/列表数组/" itemprop="url">ArrayList源码阅读笔记</a></h1>
+                <a class="post-title-link" href="/2018/10/03/Java源码/列表数组/" itemprop="url">ArrayList源码阅读笔记</a></h1>
         
 
         <div class="post-meta">
@@ -1180,7 +1413,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/05/03/剑指-树/">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/05/03/算法题/剑指-树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="仓颉Ziv">
@@ -1199,7 +1432,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/03/剑指-树/" itemprop="url">树面试题</a></h1>
+                <a class="post-title-link" href="/2018/05/03/算法题/剑指-树/" itemprop="url">树面试题</a></h1>
         
 
         <div class="post-meta">
@@ -1386,7 +1619,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/05/02/剑指-回溯法/">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/05/02/算法题/剑指-回溯法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="仓颉Ziv">
@@ -1405,7 +1638,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/02/剑指-回溯法/" itemprop="url">回溯法面试题</a></h1>
+                <a class="post-title-link" href="/2018/05/02/算法题/剑指-回溯法/" itemprop="url">回溯法面试题</a></h1>
         
 
         <div class="post-meta">
@@ -1575,7 +1808,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/05/01/剑指offer-链表/">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/05/01/算法题/剑指offer-链表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="仓颉Ziv">
@@ -1594,7 +1827,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/01/剑指offer-链表/" itemprop="url">链表面试题</a></h1>
+                <a class="post-title-link" href="/2018/05/01/算法题/剑指offer-链表/" itemprop="url">链表面试题</a></h1>
         
 
         <div class="post-meta">
@@ -1765,7 +1998,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/03/03/从尾到头打印链表/">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/03/03/算法题/从尾到头打印链表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="仓颉Ziv">
@@ -1784,7 +2017,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/03/从尾到头打印链表/" itemprop="url">从尾到头打印链表</a></h1>
+                <a class="post-title-link" href="/2018/03/03/算法题/从尾到头打印链表/" itemprop="url">从尾到头打印链表</a></h1>
         
 
         <div class="post-meta">
@@ -1904,7 +2137,7 @@
           <h3 id="剑指—从尾到头打印链表"><a href="#剑指—从尾到头打印链表" class="headerlink" title="剑指—从尾到头打印链表"></a>剑指—从尾到头打印链表</h3><h4 id="emsp-1-题目描述"><a href="#emsp-1-题目描述" class="headerlink" title="&emsp;1. 题目描述"></a>&emsp;1. 题目描述</h4><p>&emsp;&emsp;输入一个链表，从尾到头打印链表每个节点的值。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/03/从尾到头打印链表/#more" rel="contents">
+            <a class="btn" href="/2018/03/03/算法题/从尾到头打印链表/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1956,7 +2189,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/03/03/替换空格/">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/03/03/算法题/替换空格/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="仓颉Ziv">
@@ -1975,7 +2208,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/03/替换空格/" itemprop="url">替换空格</a></h1>
+                <a class="post-title-link" href="/2018/03/03/算法题/替换空格/" itemprop="url">替换空格</a></h1>
         
 
         <div class="post-meta">
@@ -2095,198 +2328,7 @@
           <h3 id="剑指—替换空格"><a href="#剑指—替换空格" class="headerlink" title="剑指—替换空格"></a>剑指—替换空格</h3><h4 id="emsp-1-题目描述"><a href="#emsp-1-题目描述" class="headerlink" title="&emsp;1. 题目描述"></a>&emsp;1. 题目描述</h4><p>&emsp;&emsp;请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/03/替换空格/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/03/03/二维数组的查找/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="仓颉Ziv">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/axin.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="仓颉Ziv">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/03/二维数组的查找/" itemprop="url">二维数组中的查找</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-03T13:13:26+08:00">
-                2018-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/编程/" itemprop="url" rel="index">
-                    <span itemprop="name">编程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  355
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-	
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="剑指—二维数组中的查找"><a href="#剑指—二维数组中的查找" class="headerlink" title="剑指—二维数组中的查找"></a>剑指—二维数组中的查找</h3><h4 id="emsp-1-题目描述"><a href="#emsp-1-题目描述" class="headerlink" title="&emsp;1. 题目描述"></a>&emsp;1. 题目描述</h4><p>&emsp;&emsp;在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数.<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/03/二维数组的查找/#more" rel="contents">
+            <a class="btn" href="/2018/03/03/算法题/替换空格/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2378,7 +2420,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2400,7 +2442,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2508,7 +2550,7 @@ var _hmt = _hmt || [];
 </script>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">我共写了18.9k字</span>
+  <span class="post-count">我共写了20.9k字</span>
 </div>
 
 
