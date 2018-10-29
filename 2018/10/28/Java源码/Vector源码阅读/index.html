@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java源码阅读," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="仓颉Ziv" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Vector一、Vector简介1.1 类继承结构 1.2 数据结构 二、源码2.1 注释 Vector与ArrayList是非常相似的，注释中的说明也是类似的，可参考上篇博文“ArrayList源码阅读”。注释中有这样一句话：“Vector是同步的，如果不需要线程安全的实现，推荐使用ArrayList代替Vector”。  2.2 定义12public class Vector&amp;lt;E&amp;gt;">
+<meta name="keywords" content="Java源码阅读">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vector源码阅读笔记">
+<meta property="og:url" content="http://writinglife.vip/2018/10/28/Java源码/Vector源码阅读/index.html">
+<meta property="og:site_name" content="仓颉Ziv">
+<meta property="og:description" content="Vector一、Vector简介1.1 类继承结构 1.2 数据结构 二、源码2.1 注释 Vector与ArrayList是非常相似的，注释中的说明也是类似的，可参考上篇博文“ArrayList源码阅读”。注释中有这样一句话：“Vector是同步的，如果不需要线程安全的实现，推荐使用ArrayList代替Vector”。  2.2 定义12public class Vector&amp;lt;E&amp;gt;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/Vector%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/ArrayList%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+<meta property="og:updated_time" content="2018-10-29T08:17:17.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vector源码阅读笔记">
+<meta name="twitter:description" content="Vector一、Vector简介1.1 类继承结构 1.2 数据结构 二、源码2.1 注释 Vector与ArrayList是非常相似的，注释中的说明也是类似的，可参考上篇博文“ArrayList源码阅读”。注释中有这样一句话：“Vector是同步的，如果不需要线程安全的实现，推荐使用ArrayList代替Vector”。  2.2 定义12public class Vector&amp;lt;E&amp;gt;">
+<meta name="twitter:image" content="http://ovrlh76oe.bkt.clouddn.com/Vector%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://writinglife.vip/2018/10/28/Java源码/Vector源码阅读/"/>
+
+
+
+
+
+  <title>Vector源码阅读笔记 | 仓颉Ziv</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js??d2ad2c1181aaad513232100ed6cf9e2a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">仓颉Ziv</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-envelope"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/10/28/Java源码/Vector源码阅读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="仓颉Ziv">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/axin.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仓颉Ziv">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vector源码阅读笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-28T22:37:00+08:00">
+                2018-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,357
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+	
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><h3 id="一、Vector简介"><a href="#一、Vector简介" class="headerlink" title="一、Vector简介"></a>一、Vector简介</h3><h4 id="1-1-类继承结构"><a href="#1-1-类继承结构" class="headerlink" title="1.1 类继承结构"></a>1.1 类继承结构</h4><p><img src="http://ovrlh76oe.bkt.clouddn.com/Vector%E7%B1%BB%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84.png" alt="Alt Text"></p>
+<h4 id="1-2-数据结构"><a href="#1-2-数据结构" class="headerlink" title="1.2 数据结构"></a>1.2 数据结构</h4><p><img src="http://ovrlh76oe.bkt.clouddn.com/ArrayList%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="Alt Text"></p>
+<h3 id="二、源码"><a href="#二、源码" class="headerlink" title="二、源码"></a>二、源码</h3><h4 id="2-1-注释"><a href="#2-1-注释" class="headerlink" title="2.1 注释"></a>2.1 注释</h4><blockquote>
+<pre><code>Vector与ArrayList是非常相似的，注释中的说明也是类似的，可参考上篇博文“ArrayList源码阅读”。注释中有这样一句话：“Vector是同步的，如果不需要线程安全的实现，推荐使用ArrayList代替Vector”。
+</code></pre></blockquote>
+<h4 id="2-2-定义"><a href="#2-2-定义" class="headerlink" title="2.2 定义"></a>2.2 定义</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Vector</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt; </span></div><div class="line"><span class="class"><span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></div></pre></td></tr></table></figure>
+<p>类定义与类继承结构图是对应的。<br>从中我们可以了解到：</p>
+<ul>
+<li>Vector<e>：说明它支持泛型。</e></li>
+<li>extends AbstractList<e> ：继承了AbstractList。AbstractList提供List接口的骨干实现，以最大限度地减少“随机访问”数据存储（如ArrayList）实现Llist所需的工作。</e></li>
+<li>implements List<e>：实现了List。实现了所有可选列表操作。</e></li>
+<li>implements RandomAccess：表明Vector支持快速（通常是固定时间）随机访问。此接口的主要目的是允许一般的算法更改其行为，从而在将其应用到随机或连续访问列表时能提供良好的性能。</li>
+<li>implements Cloneable：表明其可以调用clone()方法来返回实例的field-for-field拷贝。</li>
+<li>implements java.io.Serializable：表明该类具有序列化功能。</li>
+</ul>
+<h4 id="2-3-域"><a href="#2-3-域" class="headerlink" title="2.3 域"></a>2.3 域</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">/**</span></div><div class="line"><span class="comment"> * 保存vector元素的数组，数组的长度就是vector的容量，vector的容量至少要能</span></div><div class="line"><span class="comment"> * 保存所有的元素</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * &lt;p&gt;任何在vector最后一个元素之后的数组元素都是null</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@serial</span></span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">protected</span> Object[] elementData;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * vector中的实际元素数</span></div><div class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> elementData[elementCount-1]&#125; are the actual items.</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@serial</span></span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">protected</span> <span class="keyword">int</span> elementCount;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * vector在自动扩容时增加的容量，当vector的实际容量将要大于它的最大容量时，vector自动增加的容量</span></div><div class="line"><span class="comment"> * 当该值&lt;=0时，vector的容量需要扩容时就扩为原来的2倍</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@serial</span></span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">protected</span> <span class="keyword">int</span> capacityIncrement;</div><div class="line"></div><div class="line"><span class="comment">/** use serialVersionUID from JDK 1.0.2 for interoperability */</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">2767605614048989439L</span>;</div></pre></td></tr></table></figure>
+<p>查看上面源码中的注释即可，比较简单。</p>
+<h4 id="2-4-构造方法"><a href="#2-4-构造方法" class="headerlink" title="2.4 构造方法"></a>2.4 构造方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">/**</span></div><div class="line"><span class="comment">   * 构造一个指定初始容量为initialCapacity，自增容量为capacityIncrement的空vector</span></div><div class="line"><span class="comment">   * <span class="doctag">@throws</span> IllegalArgumentException if the specified initial capacity</span></div><div class="line"><span class="comment">   *         is negative</span></div><div class="line"><span class="comment">   */</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Vector</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">int</span> capacityIncrement)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>();</div><div class="line">      <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal Capacity: "</span>+</div><div class="line">                                             initialCapacity);</div><div class="line">      <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</div><div class="line">      <span class="keyword">this</span>.capacityIncrement = capacityIncrement;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line"><span class="comment">   * 构造一个指定初始容量为initialCapacity，自增容量为0的空vector</span></div><div class="line"><span class="comment">* 实际上里面调用的是上一个构造函数</span></div><div class="line"><span class="comment">   * <span class="doctag">@throws</span> IllegalArgumentException if the specified initial capacity</span></div><div class="line"><span class="comment">   *         is negative</span></div><div class="line"><span class="comment">   */</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Vector</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>(initialCapacity, <span class="number">0</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line"><span class="comment">   * 构造一个指定初始容量为10，自增容量为0的空vector</span></div><div class="line"><span class="comment">   * 实际上调用的是上一个构造函数</span></div><div class="line"><span class="comment">   */</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Vector</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>(<span class="number">10</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line"><span class="comment">   * 使用指定的Collection构造vector</span></div><div class="line"><span class="comment">   * <span class="doctag">@throws</span> NullPointerException if the specified collection is null</span></div><div class="line"><span class="comment">   * <span class="doctag">@since</span>   1.2</span></div><div class="line"><span class="comment">   */</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Vector</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">      elementData = c.toArray();</div><div class="line">      elementCount = elementData.length;</div><div class="line">      <span class="comment">// c.toArray might (incorrectly) not return Object[] (see 6260652)</span></div><div class="line">      <span class="keyword">if</span> (elementData.getClass() != Object[].class)</div><div class="line">          elementData = Arrays.copyOf(elementData, elementCount, Object[].class);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>共有四个构造函数</p>
+<ol>
+<li>public Vector(int initialCapacity, int capacityIncrement)</li>
+<li>public Vector(int initialCapacity)</li>
+<li>public Vector()</li>
+<li>public Vector(Collection&lt;? extends E&gt; c)</li>
+</ol>
+<h4 id="2-5-核心方法"><a href="#2-5-核心方法" class="headerlink" title="2.5 核心方法"></a>2.5 核心方法</h4><p>Vector类所有被外部访问到的方法，都是线程同步的，实现方法是“synchronized”的关键字。举几个栗子</p>
+<h5 id="2-5-1-copyInto-object-anArray"><a href="#2-5-1-copyInto-object-anArray" class="headerlink" title="2.5.1 copyInto(object[] anArray)"></a>2.5.1 copyInto(object[] anArray)</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 将vector的所有元素复制进指定的数组anArray中</span></div><div class="line"><span class="comment"> * The item at index &#123;<span class="doctag">@code</span> k&#125; in this vector is copied into</span></div><div class="line"><span class="comment"> * component &#123;<span class="doctag">@code</span> k&#125; of &#123;<span class="doctag">@code</span> anArray&#125;.</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span>  anArray the array into which the components get copied</span></div><div class="line"><span class="comment"> * <span class="doctag">@throws</span> NullPointerException if the given array is null</span></div><div class="line"><span class="comment"> * <span class="doctag">@throws</span> IndexOutOfBoundsException if the specified array is not</span></div><div class="line"><span class="comment"> *         large enough to hold all the components of this vector</span></div><div class="line"><span class="comment"> * <span class="doctag">@throws</span> ArrayStoreException if a component of this vector is not of</span></div><div class="line"><span class="comment"> *         a runtime type that can be stored in the specified array</span></div><div class="line"><span class="comment"> * <span class="doctag">@see</span> #toArray(Object[])</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">copyInto</span><span class="params">(Object[] anArray)</span> </span>&#123;</div><div class="line">    System.arraycopy(elementData, <span class="number">0</span>, anArray, <span class="number">0</span>, elementCount);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>方法被synchronized关键字修饰。</p>
+<h5 id="2-5-2-trimToSize"><a href="#2-5-2-trimToSize" class="headerlink" title="2.5.2  trimToSize()"></a>2.5.2  trimToSize()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">/**</span></div><div class="line"><span class="comment">   * 将底层数组的容量调整为当前vector实际元素的个数，来释放空间</span></div><div class="line"><span class="comment">   */</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">trimToSize</span><span class="params">()</span> </span>&#123;</div><div class="line">      modCount++;</div><div class="line">      <span class="keyword">int</span> oldCapacity = elementData.length;</div><div class="line"><span class="comment">//当实际元素个数小于底层数组的长度</span></div><div class="line">      <span class="keyword">if</span> (elementCount &lt; oldCapacity) &#123;</div><div class="line">	<span class="comment">//将底层数组的长度调整为实际大小</span></div><div class="line">          elementData = Arrays.copyOf(elementData, elementCount);</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>小结：Vector与ArrayList的最大不同就是它的方法是线程同步的，实现同步的方式就是用“synchronized”修饰方法。</p>
+<h4 id="2-6-扩容机制"><a href="#2-6-扩容机制" class="headerlink" title="2.6 扩容机制"></a>2.6 扩容机制</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">/**</span></div><div class="line"><span class="comment">    * 为保证vector可以容纳所有需要容纳的元素，在必要时进行扩容</span></div><div class="line"><span class="comment">    * 扩容规则：</span></div><div class="line"><span class="comment">    * 1、capacityIncrement大于0时，新的容量将在旧的容量的基础上加上capacityIncrement；</span></div><div class="line"><span class="comment"> * 小于0时，增加到原来的2倍。</span></div><div class="line"><span class="comment"> * 2、如果新的容量还是小于至少需要的容量，则将容量扩容为至少需要的容量。</span></div><div class="line"><span class="comment"> * 3、如果至少需要的容量大于MAX_ARRAY_SIZE，则进行大容量分配，hugeCapacity()函数中进行</span></div><div class="line"><span class="comment">    * <span class="doctag">@param</span> minCapacity the desired minimum capacity</span></div><div class="line"><span class="comment">    */</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">ensureCapacity</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</div><div class="line">       <span class="keyword">if</span> (minCapacity &gt; <span class="number">0</span>) &#123;</div><div class="line">           modCount++;</div><div class="line">           ensureCapacityHelper(minCapacity);</div><div class="line">       &#125;</div><div class="line">   &#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">* ensureCapacity()方法的unsynchronized实现。</span></div><div class="line"><span class="comment">* </span></div><div class="line"><span class="comment">* ensureCapacity()是同步的，它可以调用本方法来扩容，而不用承受同步带来的消耗</span></div><div class="line"><span class="comment">* </span></div><div class="line"><span class="comment">* <span class="doctag">@see</span> #ensureCapacity(int)</span></div><div class="line"><span class="comment">*/</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityHelper</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</div><div class="line">   <span class="comment">// 如果至少需要的容量 &gt; 数组缓冲区当前的长度，就进行扩容</span></div><div class="line">	<span class="keyword">if</span> (minCapacity - elementData.length &gt; <span class="number">0</span>)</div><div class="line">		grow(minCapacity);</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">* 分派给arrays的最大容量</span></div><div class="line"><span class="comment">* 为什么要减去8呢？</span></div><div class="line"><span class="comment">* 因为某些VM会在数组中保留一些头字，尝试分配这个最大存储容量，可能会导致array容量大于VM的limit，最终导致OutOfMemoryError。</span></div><div class="line"><span class="comment">*/</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_ARRAY_SIZE = Integer.MAX_VALUE - <span class="number">8</span>;</div></pre></td></tr></table></figure>
+<p>== 小结 ==：ArrayList和Vector的扩容逻辑稍微有些不同。vector的逻辑是： newCapacity = oldCapacity + ((capacityIncrement &gt; 0) ? capacityIncrement : oldCapacity); 即如果capacityIncrement&gt;0，就加capacityIncrement，如果不是就增加一倍。<br>而ArrayList的逻辑是：<br>newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1); 即增加现有的一半。<br>后面的大容量分配逻辑是一样的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+	﻿<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+      </div>
+    
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写作不易，多谢鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://ovrlh76oe.bkt.clouddn.com/1.jpg" alt="仓颉Ziv WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://ovrlh76oe.bkt.clouddn.com/2.jpg" alt="仓颉Ziv Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java源码阅读/" rel="tag"><i class="fa fa-tag"></i> Java源码阅读</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/27/go语言学习/基本语法篇/" rel="next" title="Go语言之基本语法篇">
+                <i class="fa fa-chevron-left"></i> Go语言之基本语法篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/29/Java源码/迭代器模式中的fail-fast/" rel="prev" title="迭代器模式中的fail-fast">
+                迭代器模式中的fail-fast <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMDg1OS83NDA4"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/uploads/axin.jpg"
+              alt="仓颉Ziv" />
+          
+            <p class="site-author-name" itemprop="name">仓颉Ziv</p>
+            <p class="site-description motion-element" itemprop="description">且歌且行</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Birdziv" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/3790395311/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      微博
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vector"><span class="nav-number">1.</span> <span class="nav-text">Vector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Vector简介"><span class="nav-number">1.1.</span> <span class="nav-text">一、Vector简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-类继承结构"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 类继承结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-数据结构"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 数据结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、源码"><span class="nav-number">1.2.</span> <span class="nav-text">二、源码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-注释"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-定义"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-域"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-构造方法"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-核心方法"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 核心方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-1-copyInto-object-anArray"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">2.5.1 copyInto(object[] anArray)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-2-trimToSize"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">2.5.2  trimToSize()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-扩容机制"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6 扩容机制</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  您是第<span id="busuanzi_value_site_uv"></span>位访客
+</span>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">仓颉Ziv</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d2ad2c1181aaad513232100ed6cf9e2a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">我共写了25.6k字</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+  
+<!-- ҳ������С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- �������� -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+</body>
+</html>
