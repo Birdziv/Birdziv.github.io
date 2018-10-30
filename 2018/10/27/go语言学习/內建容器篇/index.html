@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Go编程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="仓颉Ziv" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Go语言之內建容器篇一、数组定义数组的几种方法1234567891011func main() &amp;#123;	var arr1 [5]int	//:= 要求给定初始值&amp;#123;...&amp;#125;	arr2 := [3]int&amp;#123;1,3,5&amp;#125;	//:= 也可以不给定长度，用&quot;...&quot;代替，编译器自动识别	arr3 := [...]int&amp;#123;2,4,6,8,10&amp;#125;">
+<meta name="keywords" content="Go编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言之內建容器篇">
+<meta property="og:url" content="http://writinglife.vip/2018/10/27/go语言学习/內建容器篇/index.html">
+<meta property="og:site_name" content="仓颉Ziv">
+<meta property="og:description" content="Go语言之內建容器篇一、数组定义数组的几种方法1234567891011func main() &amp;#123;	var arr1 [5]int	//:= 要求给定初始值&amp;#123;...&amp;#125;	arr2 := [3]int&amp;#123;1,3,5&amp;#125;	//:= 也可以不给定长度，用&quot;...&quot;代替，编译器自动识别	arr3 := [...]int&amp;#123;2,4,6,8,10&amp;#125;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/%E5%86%851.png">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/%E5%86%852.png">
+<meta property="og:updated_time" content="2018-10-29T12:10:30.002Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go语言之內建容器篇">
+<meta name="twitter:description" content="Go语言之內建容器篇一、数组定义数组的几种方法1234567891011func main() &amp;#123;	var arr1 [5]int	//:= 要求给定初始值&amp;#123;...&amp;#125;	arr2 := [3]int&amp;#123;1,3,5&amp;#125;	//:= 也可以不给定长度，用&quot;...&quot;代替，编译器自动识别	arr3 := [...]int&amp;#123;2,4,6,8,10&amp;#125;">
+<meta name="twitter:image" content="http://ovrlh76oe.bkt.clouddn.com/%E5%86%851.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://writinglife.vip/2018/10/27/go语言学习/內建容器篇/"/>
+
+
+
+
+
+  <title>Go语言之內建容器篇 | 仓颉Ziv</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js??d2ad2c1181aaad513232100ed6cf9e2a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">仓颉Ziv</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-envelope"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/10/27/go语言学习/內建容器篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="仓颉Ziv">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/axin.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仓颉Ziv">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go语言之內建容器篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T11:15:00+08:00">
+                2018-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,002
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+	
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Go语言之內建容器篇"><a href="#Go语言之內建容器篇" class="headerlink" title="Go语言之內建容器篇"></a>Go语言之內建容器篇</h2><h4 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h4><p>定义数组的几种方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	var arr1 [<span class="number">5</span>]<span class="keyword">int</span></div><div class="line">	<span class="comment">//:= 要求给定初始值&#123;...&#125;</span></div><div class="line">	arr2 := [<span class="number">3</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>&#125;</div><div class="line">	<span class="comment">//:= 也可以不给定长度，用"..."代替，编译器自动识别</span></div><div class="line">	arr3 := [...]<span class="keyword">int</span>&#123;<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>&#125;</div><div class="line">	<span class="comment">//二维数组</span></div><div class="line">	var grid [<span class="number">4</span>][<span class="number">5</span>]<span class="keyword">int</span></div><div class="line">	fmt.Println(arr1, arr2, arr3)</div><div class="line">	fmt.Println(grid)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>数组的遍历：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//数组的遍历</span></div><div class="line"><span class="comment">//方法1</span></div><div class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; len(arr3); i++ &#123;</div><div class="line">	fmt.Println(arr3[i])</div><div class="line">&#125;</div><div class="line"><span class="comment">//方法2</span></div><div class="line"><span class="keyword">for</span> i := range arr3 &#123;</div><div class="line">	fmt.Println(arr3[i])</div><div class="line">&#125;</div><div class="line"><span class="comment">//方法3</span></div><div class="line"><span class="keyword">for</span> _, v := range arr3 &#123;</div><div class="line">	fmt.Println(v)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>推荐使用“range”关键字，即使用方法2、3<br>注意，range是可以同时获取下标i和值v的，只是方法3中用“_”忽略了i。</p>
+<ul>
+<li>数组是值类型（值传递）：表示在调用数组的时候（func f(arr[10]int)），会将数组整个做一份拷贝，并不会影响原本数组的值。</li>
+<li>[10]int和[20]int是不同类型</li>
+<li>Java中的数组是引用传递。</li>
+<li>在go语言中一般不直接使用数组，使用的是切片</li>
+</ul>
+<h4 id="二、Slice（切片）"><a href="#二、Slice（切片）" class="headerlink" title="二、Slice（切片）"></a>二、Slice（切片）</h4><ul>
+<li>Slice理解为是数组的一个视图，修改slice也会导致原数组的修改</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	arr := [...]<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;</div><div class="line">	s := arr[<span class="number">2</span>:<span class="number">6</span>]<span class="comment">//左闭右开区间</span></div><div class="line">	fmt.Println(<span class="string">"修改slice之前"</span>)</div><div class="line">	fmt.Println(<span class="string">"arr[2:6] = "</span>, s)</div><div class="line">	updateslice(s)</div><div class="line">	fmt.Println(<span class="string">"修改slice之后"</span>)</div><div class="line">	fmt.Println(<span class="string">"arr[2:6] = "</span>, s)</div><div class="line">	fmt.Println(<span class="string">"arr = "</span>, arr)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">修改切片</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function">func <span class="title">updateslice</span><span class="params">(arr []<span class="keyword">int</span>)</span></span>&#123;</div><div class="line">	arr[<span class="number">0</span>] = <span class="number">100</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">修改slice之前</div><div class="line">arr[<span class="number">2</span>:<span class="number">6</span>] =  [<span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</div><div class="line">修改slice之后</div><div class="line">arr[<span class="number">2</span>:<span class="number">6</span>] =  [<span class="number">100</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</div><div class="line">arr =  [<span class="number">0</span> <span class="number">1</span> <span class="number">100</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span>]</div></pre></td></tr></table></figure></p>
+<p>所以，使用数组的切片非常方便，可以不用指针而实现引用传递的功能。</p>
+<ul>
+<li>Slice基础上还可以继续进行slice</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//reslice</span></div><div class="line">	fmt.Println(<span class="string">"reslice之前本身的slice"</span>,s)</div><div class="line">	s = s[:<span class="number">3</span>]</div><div class="line">	fmt.Println(<span class="string">"reslice之后的slice"</span>,s)</div><div class="line">	s = s[<span class="number">2</span>:]</div><div class="line">	fmt.Println(<span class="string">"再次reslice之后"</span>,s)</div></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">reslice之前本身的slice [<span class="number">100</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</div><div class="line">reslice之后的slice [<span class="number">100</span> <span class="number">3</span> <span class="number">4</span>]</div><div class="line">再次reslice之后 [<span class="number">4</span>]</div></pre></td></tr></table></figure></p>
+<ul>
+<li>Slice的扩展<br>首先看一个现象<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	arr := [...]<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;</div><div class="line">	fmt.Println(<span class="string">"切片扩展"</span>)</div><div class="line">	s1 := arr[<span class="number">2</span>:<span class="number">6</span>]</div><div class="line">	s2 := s1[<span class="number">3</span>:<span class="number">5</span>]</div><div class="line">	fmt.Println(<span class="string">"s1 = "</span>, s1)</div><div class="line">	fmt.Println(<span class="string">"s2 = "</span>, s2)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对于s2，需要取到s1的第三个第四个值，而s1[4]是不存在的，但是运行结果如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">切片扩展</div><div class="line">s1 =  [<span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</div><div class="line">s2 =  [<span class="number">5</span> <span class="number">6</span>]</div></pre></td></tr></table></figure></p>
+<p>也就是说，s2取到了arr中的值，为什么呢？<br>看下图<br><img src="http://ovrlh76oe.bkt.clouddn.com/%E5%86%851.png" alt="Alt Text"></p>
+<ul>
+<li>Slice的实现<br><img src="http://ovrlh76oe.bkt.clouddn.com/%E5%86%852.png" alt="Alt Text"></li>
+</ul>
+<p>Slice[i]取值时，i是不能超过len的，而reslice能取到len后面的元素的关键在于有个cap，只要不超过cap就能取到后面的值。<br>注意：slice可以向后扩展，不能向前扩展。</p>
+<h4 id="三、slice的操作"><a href="#三、slice的操作" class="headerlink" title="三、slice的操作"></a>三、slice的操作</h4><ul>
+<li>append</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	arr := [...]<span class="keyword">int</span> &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</div><div class="line">	s1 := arr[<span class="number">1</span>:<span class="number">6</span>]</div><div class="line">	showappend(s1)</div><div class="line">	fmt.Println(<span class="string">"s1 ="</span>, s1)</div><div class="line">	fmt.Println(<span class="string">"arr ="</span>, arr)</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">slice的append</span></div><div class="line"><span class="comment"> */</span></div><div class="line"> <span class="function">func <span class="title">showappend</span><span class="params">(s1 []<span class="keyword">int</span>)</span></span>&#123;</div><div class="line"> 	s2 := append(s1, <span class="number">10</span>)</div><div class="line"> 	s3 := append(s2, <span class="number">11</span>)</div><div class="line"> 	s4 := append(s3, <span class="number">12</span>)</div><div class="line"> 	<span class="comment">//由于长度已经超过了arr的cap，此时s3和s4已经不再是arr的视图，Go语言在内部</span></div><div class="line"> 	<span class="comment">//会为其新建一个更大容量的底层数组并拷贝原数组的值，外部不可见该数组；原来的数组如果不再被使用就会被垃圾回收掉</span></div><div class="line"> 	fmt.Println(<span class="string">"s2, s3, s4 ="</span>, s2, s3, s4)</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>创建slice的方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="comment">//arr := [...]int &#123;0,1,2,3,4,5,6&#125;</span></div><div class="line">   <span class="comment">//s1 := arr[1:6]</span></div><div class="line">   <span class="comment">//showappend(s1)</span></div><div class="line">   <span class="comment">//fmt.Println("s1 =", s1)</span></div><div class="line">   <span class="comment">//fmt.Println("arr =", arr)</span></div><div class="line"></div><div class="line">   <span class="comment">//方法1:先声明，再赋值</span></div><div class="line">   var s []<span class="keyword">int</span> <span class="comment">//此时s的值是nil</span></div><div class="line">   <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">100</span>; i++ &#123;</div><div class="line">      s = append(s, <span class="number">2</span> * i + <span class="number">1</span>)</div><div class="line">   &#125;</div><div class="line">   <span class="comment">//方法2：声明时直接赋值</span></div><div class="line">   s1 := []<span class="keyword">int</span>&#123;<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>&#125;</div><div class="line">   <span class="comment">//方法3：利用內建函数make创建slice</span></div><div class="line">   s2 := make([]<span class="keyword">int</span>, <span class="number">16</span>)<span class="comment">//创建一个len为16的slice</span></div><div class="line">   <span class="comment">//方法4：创建时同时指定cap</span></div><div class="line">   s3 := make([]<span class="keyword">int</span>, <span class="number">16</span>, <span class="number">32</span>)<span class="comment">//cap为32</span></div><div class="line">   fmt.Println(s1)</div><div class="line">   fmt.Println(s2)</div><div class="line">   fmt.Println(s3)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>复制、删除、删除头尾</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	fmt.Println(<span class="string">"------复制操作-------"</span>)</div><div class="line">	arr := [...]<span class="keyword">int</span> &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</div><div class="line">	fmt.Println(arr)</div><div class="line">	s1 := arr[<span class="number">1</span>:<span class="number">6</span>]</div><div class="line">	s2 := s1[<span class="number">1</span>:<span class="number">5</span>]</div><div class="line">	fmt.Println(<span class="string">"复制前s1 = "</span>,s1)</div><div class="line">	fmt.Println(<span class="string">"s2 ="</span>,s2)</div><div class="line">	<span class="comment">//内建函数copy,s1是目标slice，将s2拷贝到s1</span></div><div class="line">	copy(s1, s2)</div><div class="line">	fmt.Println(<span class="string">"复制后s1 ="</span>, s1)</div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"------删除操作-------"</span>)</div><div class="line">	<span class="comment">//要求删除s2中的3位置的元素，由于go中没有内置方法，但是可以使用append方法实现</span></div><div class="line">	<span class="comment">//注意要加“...”---可变参数列表的内容</span></div><div class="line">	s2 = append(s2[:<span class="number">3</span>], s2[<span class="number">4</span>:]...)</div><div class="line">	fmt.Println(s2)</div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"------删除头尾-------"</span>)</div><div class="line">	<span class="comment">//删除头</span></div><div class="line">	fmt.Println(<span class="string">"s2删除头前 ="</span>, s2)</div><div class="line">	s2 = s2[<span class="number">1</span>:]</div><div class="line">	fmt.Println(<span class="string">"s2删除头后 ="</span>, s2)</div><div class="line">	<span class="comment">//删除尾</span></div><div class="line">	s2 = s2[:len(s2)-<span class="number">1</span>]</div><div class="line">	fmt.Println(<span class="string">"s2删除尾后 ="</span>, s2)</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">------复制操作-------</div><div class="line">[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</div><div class="line">复制前s1 =  [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</div><div class="line">s2 = [<span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</div><div class="line">复制后s1 = [<span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">5</span>]</div><div class="line">------删除操作-------</div><div class="line">[<span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</div><div class="line">------删除头尾-------</div><div class="line">s2删除头前 = [<span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</div><div class="line">s2删除头后 = [<span class="number">4</span> <span class="number">5</span>]</div><div class="line">s2删除尾后 = [<span class="number">4</span>]</div></pre></td></tr></table></figure></p>
+<h4 id="四、Map"><a href="#四、Map" class="headerlink" title="四、Map"></a>四、Map</h4><ul>
+<li>Map的定义及相关操作<br>Map[K]V;<br>复合map：map[K1]map[K2]V：最外层的map的key是K1，他的值是map[K2]V，也是一个key为K2，值为V的map</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	fmt.Println(<span class="string">"------创建map------"</span>)</div><div class="line">	<span class="comment">//方法1：声明时直接赋值</span></div><div class="line">	fmt.Println(<span class="string">"方法1："</span>)</div><div class="line">	m := map[string] string &#123;</div><div class="line">		<span class="string">"name"</span>: <span class="string">"leng"</span>,</div><div class="line">		<span class="string">"age"</span>: <span class="string">"24"</span>,</div><div class="line">		<span class="string">"address"</span>: <span class="string">"jiangxi"</span>,</div><div class="line">		<span class="string">"hobby"</span>: <span class="string">"movie"</span>,</div><div class="line">	&#125;</div><div class="line">	fmt.Println(m)</div><div class="line">	<span class="comment">//方法2：定义空的map，使用內建函数make</span></div><div class="line">	fmt.Println(<span class="string">"方法2："</span>)</div><div class="line">	m2 := make(map[string]<span class="keyword">int</span>)<span class="comment">//m2 == empty map</span></div><div class="line">	fmt.Println(m2)</div><div class="line">	<span class="comment">//方法3：不使用:,用var，可以不用在声明时就初始化</span></div><div class="line">	fmt.Println(<span class="string">"方法3："</span>)</div><div class="line">	var m3 map[string]<span class="keyword">int</span> <span class="comment">//m3 == nil，只是表现形式和空map一样</span></div><div class="line">	fmt.Println(m3)</div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"------遍历map------"</span>)</div><div class="line">	<span class="comment">//使用range</span></div><div class="line">	<span class="keyword">for</span> k, v := range m &#123;</div><div class="line">		fmt.Println(k, v)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"------获取map的值------"</span>)</div><div class="line">	name, ok := m[<span class="string">"name"</span>]</div><div class="line">	fmt.Println(name, ok)</div><div class="line">	<span class="comment">//当给出的key在map中不存在时，返回的是空，并返回false</span></div><div class="line">	love, ok := m[<span class="string">"lover"</span>]</div><div class="line">	fmt.Println(love, ok)</div><div class="line"></div><div class="line">	fmt.Println(<span class="string">"------删除map中的元素------"</span>)</div><div class="line">	name1, ok := m[<span class="string">"name"</span>]</div><div class="line">	fmt.Println(name1, ok)</div><div class="line">	delete(m, <span class="string">"name"</span>)</div><div class="line">	name1, ok = m[<span class="string">"name"</span>]</div><div class="line">	fmt.Println(name1, ok)</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>map的key的要求</li>
+</ul>
+<ol>
+<li>map使用哈希表，必须可以比较相等；</li>
+<li>除了slice，map，function外的所有內建类型都可以作为key（因为这三者无法比较相等）；</li>
+<li>Struct类型不包含上述字段，也可作为key</li>
+</ol>
+<h4 id="五、Map例题：寻找最长无重复字符的子串"><a href="#五、Map例题：寻找最长无重复字符的子串" class="headerlink" title="五、Map例题：寻找最长无重复字符的子串"></a>五、Map例题：寻找最长无重复字符的子串</h4><p>这是一道leetcode上的算法题，解题算法如下：</p>
+<ol>
+<li>遍历字符串，指针start表示子串从此处开始，maxLength表示最长无重复子串的长度，lastOccurred[x]，表示字符x上一次出现的位置；</li>
+<li>对于遍历到的字符x，lastOccurred[x]不存在或者小于start时，无重复子串长度加1；</li>
+<li>lastOccurred[x] &gt;= start时，更新start = lastOccurred[x]+1；</li>
+<li>更新maxLength</li>
+</ol>
+<p>解决如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	s := <span class="string">"abcabcacb"</span></div><div class="line">	s1 := <span class="string">"一二三四三二"</span></div><div class="line">	fmt.Println(lengthOfNonRepeating(s))</div><div class="line">	fmt.Println(lengthOfNonRepeating(s1))</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">求最长无重复子串的长度</span></div><div class="line"><span class="comment"> */</span></div><div class="line"> <span class="function">func <span class="title">lengthOfNonRepeating</span><span class="params">(s string)</span> <span class="keyword">int</span> </span>&#123;</div><div class="line"> 	start, maxLength := <span class="number">0</span>, <span class="number">0</span></div><div class="line"> 	lastOccurred := make(map[rune]<span class="keyword">int</span>)</div><div class="line"> 	<span class="keyword">for</span> i, ch := range s &#123;</div><div class="line"> 		<span class="comment">//由于当lastOccurred[ch]不存在时，返回的是0，这是不对的</span></div><div class="line"> 		<span class="comment">//所以也要判断lastOccurred[ch]到底是否存在</span></div><div class="line"> 		lastI, ok := lastOccurred[ch]</div><div class="line"> 		<span class="keyword">if</span> ok &amp;&amp; lastI &gt;= start&#123;</div><div class="line"> 			start = lastI + <span class="number">1</span></div><div class="line">		&#125;</div><div class="line"> 		<span class="keyword">if</span> i - start + <span class="number">1</span> &gt; maxLength &#123;</div><div class="line"> 			maxLength = i - start + <span class="number">1</span></div><div class="line">		&#125;</div><div class="line"> 		lastOccurred[ch] = i</div><div class="line">	&#125;</div><div class="line"> 	<span class="keyword">return</span> maxLength</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">3</span></div><div class="line"><span class="number">10</span></div></pre></td></tr></table></figure></p>
+<p>从结果中可以看到，对于英文字符，已经可以完成计算了（满足题目的要求），但是对于中文字符，还是有些问题。接下来就是解决这个问题 </p>
+<p>这里涉及到对go语言中的rune类型的了解，rune相当于char，也就是字符，它无论英文中文，只要是一个字符就是一个字符，而在原来的for循环中“for i, ch := range s”，这里的i，会因不同编码对中英文字符的不同而不同，比如utf-8中，中文占3字节，英文占1字节，那么遍历的时候就会出现问题。<br>而将s转化为rune之后“for i, ch := range []rune(s)”，遍历一个字符，i就加1，无论英文中文。所以rune是go语言得以应用更国际化的基础，它避免了很多字符串处理中坑。<br>因此为支持国际化，上述代码只需要修改for循环即可“for i, ch := range []rune(s)”<br>运行结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">3</span></div><div class="line"><span class="number">4</span></div></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+	﻿<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+      </div>
+    
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写作不易，多谢鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://ovrlh76oe.bkt.clouddn.com/1.jpg" alt="仓颉Ziv WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://ovrlh76oe.bkt.clouddn.com/2.jpg" alt="仓颉Ziv Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go编程/" rel="tag"><i class="fa fa-tag"></i> Go编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/27/go语言学习/基本语法篇/" rel="next" title="Go语言之基本语法篇">
+                <i class="fa fa-chevron-left"></i> Go语言之基本语法篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/28/Java源码/Vector源码阅读/" rel="prev" title="Vector源码阅读笔记">
+                Vector源码阅读笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMDg1OS83NDA4"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/uploads/axin.jpg"
+              alt="仓颉Ziv" />
+          
+            <p class="site-author-name" itemprop="name">仓颉Ziv</p>
+            <p class="site-description motion-element" itemprop="description">且歌且行</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Birdziv" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/3790395311/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      微博
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言之內建容器篇"><span class="nav-number">1.</span> <span class="nav-text">Go语言之內建容器篇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、数组"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、Slice（切片）"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、Slice（切片）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、slice的操作"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、slice的操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、Map"><span class="nav-number">1.0.4.</span> <span class="nav-text">四、Map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、Map例题：寻找最长无重复字符的子串"><span class="nav-number">1.0.5.</span> <span class="nav-text">五、Map例题：寻找最长无重复字符的子串</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  您是第<span id="busuanzi_value_site_uv"></span>位访客
+</span>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">仓颉Ziv</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d2ad2c1181aaad513232100ed6cf9e2a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">我共写了29.4k字</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+  
+<!-- ҳ������С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- �������� -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+</body>
+</html>

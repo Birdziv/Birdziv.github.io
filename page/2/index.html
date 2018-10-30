@@ -320,6 +320,401 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/05/03/算法题/剑指-树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="仓颉Ziv">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/axin.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仓颉Ziv">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/03/算法题/剑指-树/" itemprop="url">树面试题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-03T13:13:26+08:00">
+                2018-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,836
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+	
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#####树<br>面试题7：重建二叉树<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Definition for binary tree</span></div><div class="line"><span class="comment"> * public class TreeNode &#123;</span></div><div class="line"><span class="comment"> *     int val;</span></div><div class="line"><span class="comment"> *     TreeNode left;</span></div><div class="line"><span class="comment"> *     TreeNode right;</span></div><div class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></div><div class="line"><span class="comment"> * &#125;</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">reConstructBinaryTree</span><span class="params">(<span class="keyword">int</span> [] pre,<span class="keyword">int</span> [] in)</span> </span>&#123;</div><div class="line">        <span class="comment">//特殊输入</span></div><div class="line">        <span class="keyword">if</span>(pre == <span class="keyword">null</span> || pre.length &lt;= <span class="number">0</span> || in == <span class="keyword">null</span> || in.length &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">return</span> helper(pre,in,<span class="number">0</span>,<span class="number">0</span>,in.length-<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//辅助函数</span></div><div class="line">    <span class="function"><span class="keyword">private</span> TreeNode <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[] pre, <span class="keyword">int</span>[] in, <span class="keyword">int</span> preStart, <span class="keyword">int</span> inStart, <span class="keyword">int</span> inEnd)</span></span>&#123;</div><div class="line">        <span class="comment">//递归出口</span></div><div class="line">        <span class="keyword">if</span>(preStart &gt; pre.length - <span class="number">1</span> || inStart &gt; inEnd) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        TreeNode node = <span class="keyword">new</span> TreeNode(pre[preStart]);</div><div class="line">        <span class="comment">//找到pre[preStart]在in[]中位置</span></div><div class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = inStart; i &lt;= inEnd; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(in[i] == pre[preStart])&#123;</div><div class="line">                index = i;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        node.left = helper(pre,in,preStart+<span class="number">1</span>,inStart,index-<span class="number">1</span>);</div><div class="line">        node.right = helper(pre,in,preStart+index-inStart+<span class="number">1</span>,index+<span class="number">1</span>,inEnd);</div><div class="line">        <span class="keyword">return</span> node;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一定注意helper函数中的递归出口，写递归是一定要记得写递归出口的。这里的递归出口是前序遍历或者中序遍历集合全部遍历结束了，即表明重建结束。</p>
+<p>面试题26：树的子结构<br>方法一：常规的思路，二叉树遍历+匹配<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">HasSubtree</span><span class="params">(TreeNode root1,TreeNode root2)</span> </span>&#123;</div><div class="line">        <span class="keyword">boolean</span> res = <span class="keyword">false</span>; <span class="comment">//默认为false，有一个为空的时候</span></div><div class="line">        <span class="comment">//当两个树都不为空时才进行比较</span></div><div class="line">        <span class="keyword">if</span>(root1 != <span class="keyword">null</span> &amp;&amp; root2 != <span class="keyword">null</span>)&#123;</div><div class="line">            <span class="comment">//以这个根节点为起点判断是否包含root2</span></div><div class="line">            <span class="keyword">if</span>(root1.val == root2.val) res = ifTree1HaveTree2(root1,root2);</div><div class="line">            <span class="comment">//根节点不相同就往左子树走</span></div><div class="line">            <span class="keyword">if</span>(!res) res = HasSubtree(root1.left,root2);</div><div class="line">            <span class="comment">//都不存在再往右子树走</span></div><div class="line">            <span class="keyword">if</span>(!res) res = HasSubtree(root1.right,root2);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">ifTree1HaveTree2</span><span class="params">(TreeNode root1, TreeNode root2)</span></span>&#123;</div><div class="line">        <span class="comment">//root2已经遍历结束都能对应上则返回true</span></div><div class="line">        <span class="keyword">if</span>(root2 == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        <span class="comment">//root1已经遍历完，root2还没，则返回false</span></div><div class="line">        <span class="keyword">if</span>(root1 == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="comment">//有一个节点没对应上，false</span></div><div class="line">        <span class="keyword">if</span>(root1.val != root2.val) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="comment">//根节点对应上了则去对比左右子树</span></div><div class="line">        <span class="keyword">return</span> ifTree1HaveTree2(root1.left, root2.left) &amp;&amp; ifTree1HaveTree2(root1.right, root2.right);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>方法二：二叉树序列化+KMP算法<br>首先将二叉树进行序列化，得到两个二叉树的序列，然后根据KMP算法判断A序列是否包含B序列<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">IdenticalTree</span><span class="params">(TreeNode A, TreeNode B)</span></span>&#123;</div><div class="line">    	<span class="comment">//特殊输入</span></div><div class="line">        <span class="keyword">if</span>(A == <span class="keyword">null</span> || B == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="comment">//序列化二叉树A和B</span></div><div class="line">        StringBuilder Astr = <span class="keyword">new</span> StringBuilder(<span class="string">""</span>);</div><div class="line">        StringBuilder Bstr = <span class="keyword">new</span> StringBuilder(<span class="string">""</span>);</div><div class="line">        Serialize(A, Astr);</div><div class="line">        Serialize(B, Bstr);</div><div class="line">        <span class="comment">//序列化之后运用KMP算法判断A是否包含A</span></div><div class="line">        <span class="comment">//得到B的next数组</span></div><div class="line">        <span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[Bstr.length()+<span class="number">1</span>];</div><div class="line">        next = getNext(Bstr, next);</div><div class="line">        <span class="comment">//开始匹配</span></div><div class="line">        <span class="keyword">int</span> res = match(Astr, Bstr, next);</div><div class="line">        <span class="keyword">return</span> (res &gt; -<span class="number">1</span>) ? <span class="keyword">true</span> : <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//序列化二叉树的函数</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Serialize</span><span class="params">(TreeNode root, StringBuilder str)</span></span>&#123;</div><div class="line">    	<span class="comment">//递归结束的边界条件</span></div><div class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>)&#123;</div><div class="line">        	str.append(<span class="string">"#,"</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">            <span class="comment">//#表示空， ","表示结束</span></div><div class="line">        &#125;</div><div class="line">        str.append(root.val + <span class="string">","</span>);</div><div class="line">        Serialize(root.left, str);</div><div class="line">        Serialize(root.right,str);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//KMP算法实现,首先要计算next数组，针对目标字符串</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] getNext(String P， <span class="keyword">int</span> next[])&#123;</div><div class="line">    	<span class="keyword">int</span> p_len = P.length();</div><div class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> j = -<span class="number">1</span>;</div><div class="line">        next[<span class="number">0</span>] = -<span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(i &lt; p_len)&#123;</div><div class="line">        	<span class="keyword">if</span>(j == -<span class="number">1</span> || p.charAt(i) == p.charAt(j))&#123;</div><div class="line">            	i++;</div><div class="line">                j++;</div><div class="line">                next[i] = j;</div><div class="line">            &#125;<span class="keyword">else</span> &#123;j = next[j];&#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> next;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//字符串匹配</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">match</span><span class="params">(String A, String B, <span class="keyword">int</span> next[])</span></span>&#123;</div><div class="line">    	<span class="keyword">int</span> i = <span class="number">0</span>; <span class="keyword">int</span> j = <span class="number">0</span>; <span class="comment">//分别表示A和B的下标</span></div><div class="line">        <span class="keyword">while</span>(i &lt; A.length() &amp;&amp; j &lt; B.length())&#123;</div><div class="line">        	<span class="keyword">if</span>(j == -<span class="number">1</span> || A.charAt(i) == B.charAt(j))&#123; <span class="comment">//j == -1:第一个字符不匹配或者A</span></div><div class="line">            	i++;</div><div class="line">                j++;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">            	j = next[j];<span class="comment">//next[j]可能为-1</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(j == B.length()) <span class="comment">// 匹配成功</span></div><div class="line">        	<span class="keyword">return</span> i - j;<span class="comment">//返回位置</span></div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;<span class="comment">//匹配失败</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>KMP算法：<a href="https://segmentfault.com/a/1190000008575379" target="_blank" rel="external">https://segmentfault.com/a/1190000008575379</a><br>面试题27：二叉树镜像<br>分析：首先前序遍历二叉树，如果节点为空或者左右子树均为空则返回。<br>然后交换左子树和右子树，接着再各自递归。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Mirror</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) <span class="keyword">return</span>;</div><div class="line">        TreeNode temp = root.left;</div><div class="line">        root.left = root.right;</div><div class="line">        root.right = temp;</div><div class="line">        <span class="keyword">if</span>(root.right != <span class="keyword">null</span>)</div><div class="line">            Mirror(root.right);</div><div class="line">        <span class="keyword">if</span>(root.left != <span class="keyword">null</span>)</div><div class="line">            Mirror(root.left);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>面试题32：从上往下打印二叉树<br>分析：二叉树的遍历问题，一般使用队列解决<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">PrintFromTopToBottom</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">        ArrayList&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> res;</div><div class="line">        <span class="comment">//Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;(); //创建一个queue保存每次输出的节点</span></div><div class="line">        ArrayList&lt;TreeNode&gt; queue = <span class="keyword">new</span> ArrayList&lt;TreeNode&gt;();</div><div class="line">        queue.add(root);</div><div class="line">        <span class="keyword">while</span>(!queue.isEmpty())&#123;</div><div class="line">            <span class="comment">//计算此时queue的大小，以控制下面的出队循环</span></div><div class="line">            <span class="keyword">int</span> queueSize = queue.size();</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; queueSize; i++)&#123;</div><div class="line">                TreeNode temp = queue.remove(<span class="number">0</span>);</div><div class="line">                res.add(temp.val);</div><div class="line">                <span class="keyword">if</span>(temp.left != <span class="keyword">null</span>) queue.add(temp.left);</div><div class="line">                <span class="keyword">if</span>(temp.right != <span class="keyword">null</span>) queue.add(temp.right);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>面试题33：二叉搜索树的后序遍历<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">VerifySquenceOfBST</span><span class="params">(<span class="keyword">int</span> [] sequence)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(sequence.length==<span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">if</span>(sequence.length==<span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">return</span> ju(sequence, <span class="number">0</span>, sequence.length-<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">     <span class="comment">//因为涉及到了递归，所以需要有辅助函数，来传递参数的变化</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">ju</span><span class="params">(<span class="keyword">int</span>[] a,<span class="keyword">int</span> star,<span class="keyword">int</span> root)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(star&gt;=root)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">int</span> i = root;</div><div class="line">        <span class="comment">//从后面开始找</span></div><div class="line">        <span class="keyword">while</span>(i&gt;star&amp;&amp;a[i-<span class="number">1</span>]&gt;a[root])</div><div class="line">            i--;<span class="comment">//找到比根小的坐标</span></div><div class="line">        <span class="comment">//从前面开始找 star到i-1应该比根小</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = star;j&lt;i-<span class="number">1</span>;j++)</div><div class="line">            <span class="keyword">if</span>(a[j]&gt;a[root])</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;;</div><div class="line">        <span class="keyword">return</span> ju(a,star,i-<span class="number">1</span>)&amp;&amp;ju(a, i, root-<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>面试题34：二叉树中和为某一值的路径<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">//运用回溯思想</span></div><div class="line">    <span class="comment">//在整体的上面定义这两个变量，可以免去重新编写辅助函数的需要</span></div><div class="line">    ArrayList&lt;Integer&gt; path = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">    ArrayList&lt;ArrayList&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</div><div class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; FindPath(TreeNode root,<span class="keyword">int</span> target) &#123;</div><div class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> res;</div><div class="line">        path.add(root.val);</div><div class="line">        target -= root.val;</div><div class="line">        <span class="comment">//剪枝函数</span></div><div class="line">        <span class="keyword">if</span>(target &lt; <span class="number">0</span>)&#123;</div><div class="line">             path.remove(path.size()-<span class="number">1</span>);</div><div class="line">             <span class="keyword">return</span> res;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(target == <span class="number">0</span> &amp;&amp; root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>)&#123;</div><div class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;(path));</div><div class="line">        &#125;</div><div class="line">        FindPath(root.left,target);</div><div class="line">        FindPath(root.right,target);</div><div class="line">        <span class="comment">//将最上面的一个去除</span></div><div class="line">        path.remove(path.size() - <span class="number">1</span>);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>面试题36：二叉搜索树与双向链表<br>解题思路：<br>1.将左子树构造成双链表，并返回链表头节点。<br>2.定位至左子树双链表最后一个节点。<br>3.如果左子树链表不为空的话，将当前root追加到左子树链表。<br>4.将右子树构造成双链表，并返回链表头节点。<br>5.如果右子树链表不为空的话，将该链表追加到root节点之后。<br>6.根据左子树链表是否为空确定返回的节点。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">Convert</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(root==<span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">if</span>(root.left==<span class="keyword">null</span>&amp;&amp;root.right==<span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        <span class="comment">// 1.将左子树构造成双链表，并返回链表头节点</span></div><div class="line">        TreeNode left = Convert(root.left);</div><div class="line">        TreeNode p = left;</div><div class="line">        <span class="comment">// 2.定位至左子树双链表最后一个节点</span></div><div class="line">        <span class="keyword">while</span>(p!=<span class="keyword">null</span>&amp;&amp;p.right!=<span class="keyword">null</span>)&#123;</div><div class="line">            p = p.right;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 3.如果左子树链表不为空的话，将当前root追加到左子树链表</span></div><div class="line">        <span class="keyword">if</span>(left!=<span class="keyword">null</span>)&#123;</div><div class="line">            p.right = root;</div><div class="line">            root.left = p;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 4.将右子树构造成双链表，并返回链表头节点</span></div><div class="line">        TreeNode right = Convert(root.right);</div><div class="line">        <span class="comment">// 5.如果右子树链表不为空的话，将该链表追加到root节点之后</span></div><div class="line">        <span class="keyword">if</span>(right!=<span class="keyword">null</span>)&#123;</div><div class="line">            right.left = root;</div><div class="line">            root.right = right;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> left!=<span class="keyword">null</span>?left:root;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>面试题55：二叉树的深度<br>方法1：仿照面试题34<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">TreeDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        Queue&lt;TreeNode&gt; q = <span class="keyword">new</span> LinkedList&lt;&gt;();</div><div class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">        q.add(root);</div><div class="line">        <span class="keyword">while</span>(!q.isEmpty())&#123;</div><div class="line">            <span class="keyword">int</span> n = q.size();</div><div class="line">            sum++;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</div><div class="line">                TreeNode temp = q.poll();</div><div class="line">                <span class="keyword">if</span>(temp.left != <span class="keyword">null</span>) q.offer(temp.left);</div><div class="line">                <span class="keyword">if</span>(temp.right != <span class="keyword">null</span>) q.offer(temp.right);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行时间为11ms</p>
+<p>方法2：更简洁的使用递归的方法，树的深度 = 1 + 左子树深度及右子树深度中较深的深度，递归实现即可<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">TreeDepth</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> nleft = TreeDepth(root.left);</div><div class="line">        <span class="keyword">int</span> nright = TreeDepth(root.right);</div><div class="line">        <span class="keyword">return</span> (nleft &gt; nright) ? (nleft + <span class="number">1</span>) : (nright + <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行时间也是11ms</p>
+<p>面试题28：对称的二叉树<br>分析：首先是根节点以及其左右子树，左子树的左子树与右子树的右子树相同，左子树的右子树与右子树的左子树相同，采用队规。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isSymmetrical</span><span class="params">(TreeNode pRoot)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">if</span>(pRoot == <span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> comRoot(pRoot.left, pRoot.right);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">comRoot</span><span class="params">(TreeNode left, TreeNode right)</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        <span class="keyword">if</span>(left == <span class="keyword">null</span>) <span class="keyword">return</span> right==<span class="keyword">null</span>;</div><div class="line">        <span class="keyword">if</span>(right == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">if</span>(left.val != right.val) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">return</span> comRoot(left.right, right.left) &amp;&amp; comRoot(left.left, right.right);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>面试题8：二叉树的下一个节点<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function">TreeLinkNode <span class="title">GetNext</span><span class="params">(TreeLinkNode node)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">if</span>(node==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">if</span>(node.right!=<span class="keyword">null</span>)&#123;    <span class="comment">//如果有右子树，则找右子树的最左节点</span></div><div class="line">            node = node.right;</div><div class="line">            <span class="keyword">while</span>(node.left!=<span class="keyword">null</span>) node = node.left;</div><div class="line">            <span class="keyword">return</span> node;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span>(node.next!=<span class="keyword">null</span>)&#123; <span class="comment">//没右子树，则找第一个当前节点是父节点左孩子的节点</span></div><div class="line">            <span class="keyword">if</span>(node.next.left==node) <span class="keyword">return</span> node.next;</div><div class="line">            node = node.next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;   <span class="comment">//退到了根节点仍没找到，则返回null</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>面试题：把二叉树打印成多行<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">import</span> java.util.*;</div><div class="line"><span class="comment">//按层遍历，使用last和nlast来辅助换行</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">	ArrayList&lt;ArrayList&lt;Integer&gt;&gt; results;</div><div class="line">	<span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; Print(TreeNode pRoot) &#123;</div><div class="line">		<span class="comment">//创建一个ArrayList&lt;ArrayList&lt;Integer&gt;&gt;用于存放答案</span></div><div class="line">		results = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</div><div class="line">		<span class="keyword">if</span>(pRoot == <span class="keyword">null</span>) <span class="keyword">return</span> results;<span class="comment">//返回空的list</span></div><div class="line">		<span class="keyword">this</span>.helper(pRoot);</div><div class="line">		<span class="comment">//返回结果</span></div><div class="line">		<span class="keyword">return</span> results;</div><div class="line">		<span class="comment">//打印results中的元素，每打印一个就换行即可，不要纠结于必须得每个都加上换行符号</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(TreeNode root)</span></span>&#123;</div><div class="line">		<span class="comment">//创建一个队列</span></div><div class="line">		LinkedList&lt;TreeNode&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</div><div class="line">		ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">		<span class="comment">//创建辅助变量last和nlast</span></div><div class="line">		TreeNode last = root, nlast = <span class="keyword">null</span>;</div><div class="line">		queue.add(root);</div><div class="line">		<span class="keyword">while</span>(queue.size() != <span class="number">0</span>)&#123;</div><div class="line">			TreeNode temp = queue.poll();</div><div class="line">			list.add(temp.val);</div><div class="line">			<span class="comment">//压入左孩子并更新nlast</span></div><div class="line">			<span class="keyword">if</span>(temp.left != <span class="keyword">null</span>)&#123;</div><div class="line">				queue.add(temp.left);</div><div class="line">				nlast = temp.left;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(temp.right != <span class="keyword">null</span>)&#123;</div><div class="line">				queue.add(temp.right);</div><div class="line">				nlast = temp.right;</div><div class="line">			&#125;</div><div class="line">			<span class="comment">//如果弹出的temp==last证明这是一行的最后一个，此时的nlast所指即为下个last</span></div><div class="line">			<span class="keyword">if</span>(temp == last)&#123;</div><div class="line">				last = nlast;</div><div class="line">				results.add(list);</div><div class="line">				<span class="comment">//list再更新一次</span></div><div class="line">				list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>面试题：按之字形顺序打印二叉树<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">链接：https:<span class="comment">//www.nowcoder.com/questionTerminal/91b69814117f4e8097390d107d2efbe0</span></div><div class="line">来源：牛客网</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; Print(TreeNode pRoot) &#123;</div><div class="line">        <span class="keyword">int</span> layer = <span class="number">1</span>;</div><div class="line">        <span class="comment">//s1存奇数层节点</span></div><div class="line">        Stack&lt;TreeNode&gt; s1 = <span class="keyword">new</span> Stack&lt;TreeNode&gt;();</div><div class="line">        s1.push(pRoot);</div><div class="line">        <span class="comment">//s2存偶数层节点</span></div><div class="line">        Stack&lt;TreeNode&gt; s2 = <span class="keyword">new</span> Stack&lt;TreeNode&gt;();</div><div class="line">         </div><div class="line">        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</div><div class="line">         </div><div class="line">        <span class="keyword">while</span> (!s1.empty() || !s2.empty()) &#123;</div><div class="line">            <span class="keyword">if</span> (layer%<span class="number">2</span> != <span class="number">0</span>) &#123;</div><div class="line">                ArrayList&lt;Integer&gt; temp = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">                <span class="keyword">while</span> (!s1.empty()) &#123;</div><div class="line">                    TreeNode node = s1.pop();</div><div class="line">                    <span class="keyword">if</span>(node != <span class="keyword">null</span>) &#123;</div><div class="line">                        temp.add(node.val);</div><div class="line">                        System.out.print(node.val + <span class="string">" "</span>);</div><div class="line">                        s2.push(node.left);</div><div class="line">                        s2.push(node.right);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (!temp.isEmpty()) &#123;</div><div class="line">                    list.add(temp);</div><div class="line">                    layer++;</div><div class="line">                    System.out.println();</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                ArrayList&lt;Integer&gt; temp = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">                <span class="keyword">while</span> (!s2.empty()) &#123;</div><div class="line">                    TreeNode node = s2.pop();</div><div class="line">                    <span class="keyword">if</span>(node != <span class="keyword">null</span>) &#123;</div><div class="line">                        temp.add(node.val);</div><div class="line">                        System.out.print(node.val + <span class="string">" "</span>);</div><div class="line">                        s1.push(node.right);</div><div class="line">                        s1.push(node.left);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (!temp.isEmpty()) &#123;</div><div class="line">                    list.add(temp);</div><div class="line">                    layer++;</div><div class="line">                    System.out.println();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> list;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>面试题：序列化二叉树<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> index = -<span class="number">1</span>;</div><div class="line">    <span class="function">String <span class="title">Serialize</span><span class="params">(TreeNode root)</span> </span>&#123;</div><div class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer();</div><div class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>)&#123;</div><div class="line">            sb.append(<span class="string">"#,"</span>);</div><div class="line">            <span class="keyword">return</span> sb.toString();</div><div class="line">        &#125;</div><div class="line">        sb.append(root.val + <span class="string">","</span>);</div><div class="line">        sb.append(Serialize(root.left));</div><div class="line">        sb.append(Serialize(root.right));</div><div class="line">        <span class="keyword">return</span> sb.toString();</div><div class="line">  &#125;</div><div class="line">    <span class="function">TreeNode <span class="title">Deserialize</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        index++;</div><div class="line">       <span class="keyword">int</span> len = str.length();</div><div class="line">        <span class="keyword">if</span>(index &gt;= len)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">        String[] strr = str.split(<span class="string">","</span>);</div><div class="line">        TreeNode node = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">if</span>(!strr[index].equals(<span class="string">"#"</span>))&#123;</div><div class="line">            node = <span class="keyword">new</span> TreeNode(Integer.valueOf(strr[index]));</div><div class="line">            node.left = Deserialize(str);</div><div class="line">            node.right = Deserialize(str);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> node;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>面试题：二叉搜索树的第k个节点<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//思路：二叉搜索树按照中序遍历的顺序打印出来正好就是排序好的顺序。</span></div><div class="line"><span class="comment">//     所以，按照中序遍历顺序找到第k个结点就是结果。</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">   <span class="keyword">int</span> index = <span class="number">0</span>; <span class="comment">//计数器</span></div><div class="line">    <span class="function">TreeNode <span class="title">KthNode</span><span class="params">(TreeNode root, <span class="keyword">int</span> k)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">if</span>(root != <span class="keyword">null</span>)&#123; <span class="comment">//中序遍历寻找第k个</span></div><div class="line">            TreeNode node = KthNode(root.left,k);</div><div class="line">            <span class="keyword">if</span>(node != <span class="keyword">null</span>)</div><div class="line">                <span class="keyword">return</span> node;</div><div class="line">            index ++;</div><div class="line">            <span class="keyword">if</span>(index == k)</div><div class="line">                <span class="keyword">return</span> root;</div><div class="line">            node = KthNode(root.right,k);</div><div class="line">            <span class="keyword">if</span>(node != <span class="keyword">null</span>)</div><div class="line">                <span class="keyword">return</span> node;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>面试题：滑动窗口的最大值<br>滑动窗口题<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution14</span></span>&#123;</div><div class="line"><span class="comment">//num表示原始数组，size表示窗口的大小</span></div><div class="line">	<span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">maxInWindows</span><span class="params">(<span class="keyword">int</span>[] num, <span class="keyword">int</span> size)</span></span>&#123;</div><div class="line">    	ArrayList&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        <span class="keyword">if</span>(size == <span class="number">0</span>) <span class="keyword">return</span> res;</div><div class="line">        <span class="comment">//双端队列</span></div><div class="line">        ArrayDeque&lt;Integer&gt; q = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</div><div class="line">        <span class="keyword">int</span> begin = <span class="number">0</span>; <span class="comment">//用begin来维持一个窗口的大小size</span></div><div class="line">        <span class="comment">//遍历数组</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num.length; i++)&#123;</div><div class="line">        	begin = i - size + <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span>(q.isEmpty()) q.add(i);<span class="comment">//为空时直接添加</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(begin &gt; q.peekFirst()) q.pollFirst(); <span class="comment">//不为空时当最前面的下标过期时，先将该下标丢掉。</span></div><div class="line">            <span class="comment">//添加下标到队尾的逻辑,</span></div><div class="line">            <span class="keyword">while</span>(!q,isEmpty() &amp;&amp; num[q.peekLast()] &lt;= num[i])</div><div class="line">            	q.pollLast();<span class="comment">//把比num[i]小的丢掉</span></div><div class="line">            q.add[i];<span class="comment">//把i加上</span></div><div class="line">            <span class="keyword">if</span>(begin &gt;= <span class="number">0</span>) res.add(num[q.peekFirst()]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/05/02/算法题/剑指-回溯法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="仓颉Ziv">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/axin.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仓颉Ziv">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/02/算法题/剑指-回溯法/" itemprop="url">回溯法面试题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-02T13:13:26+08:00">
+                2018-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  739
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+	
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###剑指offer题目分类</p>
+<p>#####七、回溯法<br>介绍：<a href="https://blog.csdn.net/qfikh/article/details/51960331" target="_blank" rel="external">https://blog.csdn.net/qfikh/article/details/51960331</a><br>重点：1、回溯法 = 穷举 + 剪枝；<br>&emsp;&emsp;&emsp;2、回溯法依赖的两种数据结构：子集树和排列数，时间复杂度分别为O(2^n)和O(n!).n为元素个数<br>&emsp;&emsp;&emsp;3、回溯法的两种算法框架：递归回溯和迭代回溯<br>面试题12：矩阵中的路径<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasPath</span><span class="params">(<span class="keyword">char</span>[] matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">char</span>[] str)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">boolean</span>[] flag = <span class="keyword">new</span> <span class="keyword">boolean</span>[matrix.length];</div><div class="line">        <span class="comment">//此为穷举</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows; i++)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; cols; j++)&#123;</div><div class="line">                <span class="comment">//判断该节点是否可以作为起点</span></div><div class="line">                <span class="keyword">if</span>(helper(matrix, rows, cols, i, j, str, <span class="number">0</span>, flag))</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//遍历完仍旧没有一条符合</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//helper函数用来判断整条路径，注意这里对边界点的处理</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">helper</span><span class="params">(<span class="keyword">char</span>[] matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> i, <span class="keyword">int</span> j,<span class="keyword">char</span>[] str, <span class="keyword">int</span> pathlength, <span class="keyword">boolean</span>[] flag)</span></span>&#123;</div><div class="line">        <span class="comment">//pathlength为此时遍历的路径的深度，flag是为了表示该点是否已经被遍历过</span></div><div class="line">        <span class="comment">//还未到达递归出口时，比较matrix[i][j]与str[pathlength]的关系，注意这里的matrix是一维的</span></div><div class="line">        <span class="keyword">int</span> index = i*cols + j;</div><div class="line">        <span class="comment">//此为剪枝函数，只要该节点不满足下面的，都不继续遍历</span></div><div class="line">        <span class="comment">//注意处理边界条件的方式</span></div><div class="line">        <span class="keyword">if</span>(i&lt;<span class="number">0</span> || i&gt;=rows || j&lt;<span class="number">0</span> || j&gt;=cols || flag[index]==<span class="keyword">true</span> || matrix[index] != str[pathlength])</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="comment">//满足则继续向后遍历，此时开始在pathlength节点上进行扩展,并将该节点的标识置为true</span></div><div class="line">        flag[index] = <span class="keyword">true</span>;</div><div class="line">        <span class="comment">//递归出口，pathlength等于str的长度-1</span></div><div class="line">        <span class="keyword">if</span>(pathlength == str.length - <span class="number">1</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        pathlength++;</div><div class="line">        <span class="keyword">if</span>(helper(matrix, rows, cols, i-<span class="number">1</span>, j, str, pathlength, flag) || helper(matrix, rows, cols, i+<span class="number">1</span>, j, str, pathlength, flag) ||</div><div class="line">          helper(matrix, rows, cols, i, j+<span class="number">1</span>, str, pathlength, flag) || helper(matrix, rows, cols, i, j-<span class="number">1</span>, str, pathlength, flag))</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        <span class="comment">//如果上面if中没有返回true，则说明这层节点不行</span></div><div class="line">        flag[index] = <span class="keyword">false</span>;</div><div class="line">        pathlength--;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注释写的比较清楚，从代码中去寻找开头所说的几个重点。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">//特殊输入</span></div><div class="line">        <span class="keyword">if</span>(threshold &lt; <span class="number">0</span> || rows &lt;= <span class="number">0</span> || cols &lt;= <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">        <span class="keyword">boolean</span>[] flag = <span class="keyword">new</span> <span class="keyword">boolean</span>[rows * cols];</div><div class="line">        <span class="comment">//与上题不一样的地方是，这里的起点是固定的，不用对起点穷举</span></div><div class="line">        count = helper(threshold, rows, cols, <span class="number">0</span>, <span class="number">0</span>, flag);</div><div class="line">        <span class="keyword">return</span> count;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">boolean</span>[] flag)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">        <span class="comment">//剪枝函数</span></div><div class="line">        <span class="keyword">if</span>(check(threshold, rows, cols, i, j, flag))&#123;</div><div class="line">            <span class="comment">//表示该点符合条件，计算该点的其他点是否符合,flag标志位变</span></div><div class="line">            flag[i*cols + j] = <span class="keyword">true</span>;</div><div class="line">            <span class="comment">//上下左右穷举</span></div><div class="line">            count = <span class="number">1</span> + helper(threshold, rows, cols, i+<span class="number">1</span>, j, flag) + helper(threshold, rows, cols, i-<span class="number">1</span>, j, flag)</div><div class="line">                      +helper(threshold, rows, cols, i, j+<span class="number">1</span>, flag) + helper(threshold, rows, cols, i, j-<span class="number">1</span>, flag);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> count;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//check函数用来检查剪枝条件</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">boolean</span>[] flag)</span></span>&#123;</div><div class="line">        <span class="comment">//加入对于边界条件的处理</span></div><div class="line">        <span class="keyword">if</span>(i&gt;=<span class="number">0</span> &amp;&amp; j&gt;=<span class="number">0</span> &amp;&amp; i&lt;rows &amp;&amp; j&lt;cols &amp;&amp; getDigitSum(i) + getDigitSum(j) &lt;= threshold &amp;&amp; !flag[i*cols + j])</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//getDigitSum用来得到数位和</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getDigitSum</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(num &gt; <span class="number">0</span>)&#123;</div><div class="line">            sum += num % <span class="number">10</span>;</div><div class="line">            num /= <span class="number">10</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/05/01/算法题/剑指offer-链表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1836,202 +2231,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2017/09/04/Hexo+GitHub搭建属于自己的博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="仓颉Ziv">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/axin.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="仓颉Ziv">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/04/Hexo+GitHub搭建属于自己的博客/" itemprop="url">Hexo+GitHub搭建属于自己的博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T21:38:26+08:00">
-                2017-09-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2,049
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-	
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="如何利用github-hexo搭建个人博客—纯小白入门教程"><a href="#如何利用github-hexo搭建个人博客—纯小白入门教程" class="headerlink" title="如何利用github+hexo搭建个人博客—纯小白入门教程"></a>如何利用github+hexo搭建个人博客—纯小白入门教程</h2><h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>&emsp;生活的顿悟瞬间，学习上的点滴积累，工作上的零星灵感，这些不可多得的时刻，不写下来总是觉得可惜。尽管网上有那么多的平台，但总会想在无限的互联网中，能有那么一个只属于自己的空间。<br><br>&emsp;利用github+hexo可以很方便的搭建属于自己的个人博客，话不多说，下面大家跟着我一步步建立自己的个人博客吧！<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/04/Hexo+GitHub搭建属于自己的博客/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2080,7 +2284,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2210,7 +2414,7 @@ var _hmt = _hmt || [];
 </script>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">我共写了25.6k字</span>
+  <span class="post-count">我共写了29.4k字</span>
 </div>
 
 

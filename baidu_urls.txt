@@ -1,6 +1,8 @@
 http://writinglife.vip/2018/10/30/Java源码/LinkedList源码阅读/
+http://writinglife.vip/2018/10/30/go语言学习/面向对象篇/
 http://writinglife.vip/2018/10/29/Java源码/迭代器模式中的fail-fast/
 http://writinglife.vip/2018/10/28/Java源码/Vector源码阅读/
+http://writinglife.vip/2018/10/27/go语言学习/內建容器篇/
 http://writinglife.vip/2018/10/27/go语言学习/基本语法篇/
 http://writinglife.vip/2018/10/24/Java源码/迭代器模式/
 http://writinglife.vip/2018/10/03/Java源码/ArrayList源码阅读/

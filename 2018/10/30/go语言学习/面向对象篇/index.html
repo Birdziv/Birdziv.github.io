@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Go编程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="仓颉Ziv" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Go语言之面向对象篇Go语言仅支持封装，不支持继承和多态，使得面向对象非常简单。而继承和多态的功能利用接口来完成。Go语言中没有class，只有struct。Go语言没有构造函数。 一、创建对象（结构体）1234567891011121314151617181920212223242526272829303132package mainimport &quot;fmt&quot;/**节点对象，有值、左指针和右指针">
+<meta name="keywords" content="Go编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言之面向对象篇">
+<meta property="og:url" content="http://writinglife.vip/2018/10/30/go语言学习/面向对象篇/index.html">
+<meta property="og:site_name" content="仓颉Ziv">
+<meta property="og:description" content="Go语言之面向对象篇Go语言仅支持封装，不支持继承和多态，使得面向对象非常简单。而继承和多态的功能利用接口来完成。Go语言中没有class，只有struct。Go语言没有构造函数。 一、创建对象（结构体）1234567891011121314151617181920212223242526272829303132package mainimport &quot;fmt&quot;/**节点对象，有值、左指针和右指针">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11.png">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A12.png">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A13.png">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A14.png">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A15.png">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A16.png">
+<meta property="og:image" content="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A17.png">
+<meta property="og:updated_time" content="2018-10-30T09:18:36.934Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go语言之面向对象篇">
+<meta name="twitter:description" content="Go语言之面向对象篇Go语言仅支持封装，不支持继承和多态，使得面向对象非常简单。而继承和多态的功能利用接口来完成。Go语言中没有class，只有struct。Go语言没有构造函数。 一、创建对象（结构体）1234567891011121314151617181920212223242526272829303132package mainimport &quot;fmt&quot;/**节点对象，有值、左指针和右指针">
+<meta name="twitter:image" content="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://writinglife.vip/2018/10/30/go语言学习/面向对象篇/"/>
+
+
+
+
+
+  <title>Go语言之面向对象篇 | 仓颉Ziv</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js??d2ad2c1181aaad513232100ed6cf9e2a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">仓颉Ziv</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-envelope"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://writinglife.vip/2018/10/30/go语言学习/面向对象篇/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="仓颉Ziv">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/axin.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="仓颉Ziv">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go语言之面向对象篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-30T17:03:00+08:00">
+                2018-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,764
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+	
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Go语言之面向对象篇"><a href="#Go语言之面向对象篇" class="headerlink" title="Go语言之面向对象篇"></a>Go语言之面向对象篇</h2><p>Go语言仅支持封装，不支持继承和多态，使得面向对象非常简单。而继承和多态的功能利用接口来完成。<br>Go语言中没有class，只有struct。<br>Go语言没有构造函数。</p>
+<h4 id="一、创建对象（结构体）"><a href="#一、创建对象（结构体）" class="headerlink" title="一、创建对象（结构体）"></a>一、创建对象（结构体）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">节点对象，有值、左指针和右指针</span></div><div class="line"><span class="comment"> */</span></div><div class="line">type treeNode struct &#123;</div><div class="line">	value <span class="keyword">int</span></div><div class="line">	left, right *treeNode</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">go语言中没有构造函数，但是可以自定义工厂函数构造对象</span></div><div class="line"><span class="comment"> */</span></div><div class="line"> <span class="function">func <span class="title">createNode</span><span class="params">(value <span class="keyword">int</span>)</span> *treeNode </span>&#123;</div><div class="line"> 	<span class="comment">//这里返回的是一个局部变量的地址供外界使用，在go中是允许的</span></div><div class="line"> 	<span class="keyword">return</span> &amp;treeNode&#123;value: value&#125;</div><div class="line"> &#125;</div><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	var root treeNode</div><div class="line">	fmt.Println(root)</div><div class="line"></div><div class="line">	<span class="comment">//创建对象的几种方法</span></div><div class="line">	root = treeNode&#123;value: <span class="number">3</span>&#125;</div><div class="line">	root.left = &amp;treeNode&#123;&#125;</div><div class="line">	root.right = &amp;treeNode&#123;<span class="number">5</span>, nil, nil&#125;</div><div class="line">	<span class="comment">//go语言中指针和对象后面都是用"."连接，在这里root.right就是指针</span></div><div class="line">	root.right.left = <span class="keyword">new</span>(treeNode)</div><div class="line">	root.left.right = createNode(<span class="number">2</span>)</div><div class="line">	fmt.Println(root)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>思考一个问题，go语言中结构创建在堆上还是栈上？<br>答案：不需要知道，go语言的编译器会根据实际的情况自己选择是分配在堆上还是栈上，像上面的情况，局部变量的地址需要返回出去，编译器就会将该变量分配在堆上。不论在堆还是在栈，都有垃圾回收机制进行管理。</p>
+<h4 id="二、为结构体定义方法"><a href="#二、为结构体定义方法" class="headerlink" title="二、为结构体定义方法"></a>二、为结构体定义方法</h4><p>注意函数定义的组成，以及值接收者和指针接收者两种情况</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> 为结构体定义方法</span></div><div class="line"><span class="comment"> func + (函数接收者) + 函数名</span></div><div class="line"><span class="comment"> 函数接收者可以是值接收者，也可以是指针接收者，具体选择哪个，由特定需要决定，</span></div><div class="line"><span class="comment"> 如果需要修改具体的内容，那么需要选择指针接收者</span></div><div class="line"><span class="comment"> 此处只是打印节点的值，故采用值接收者</span></div><div class="line"><span class="comment">  */</span></div><div class="line">  func (node treeNode) print()&#123;</div><div class="line">  	fmt.Println(node.value)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line"><span class="comment">  指针接收者</span></div><div class="line"><span class="comment">   */</span></div><div class="line">   func (node *treeNode) setValue(value <span class="keyword">int</span>)&#123;</div><div class="line">   	<span class="comment">//node虽然是指针，但是在go语言中，指针后面也是"."连接</span></div><div class="line">   	node.value = value</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>同时，还要注意，就是当调用者为空即为“nil”时，也是可以调用函数的，这一点与java完全不一样，java中的“null”不能调用任何东西，否则就报错。Go语言的这点的好处马上体现在下面的树的遍历中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">/**</span></div><div class="line"><span class="comment">   遍历树：中序遍历</span></div><div class="line"><span class="comment">    */</span></div><div class="line">    func (node *treeNode) traverse() &#123;</div><div class="line">    	<span class="keyword">if</span> node == nil &#123;</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		<span class="comment">//完全不用考虑node.left可能为nil的情况，因为nil也可以调用函数，编译不会出错</span></div><div class="line">    	node.left.traverse()</div><div class="line">    	node.print()</div><div class="line">    	node.right.traverse()</div><div class="line">	&#125;</div><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	var root treeNode</div><div class="line">	fmt.Println(root)</div><div class="line"></div><div class="line">	<span class="comment">//创建对象的几种方法</span></div><div class="line">	root = treeNode&#123;value: <span class="number">3</span>&#125;</div><div class="line">	root.left = &amp;treeNode&#123;&#125;</div><div class="line">	root.right = &amp;treeNode&#123;<span class="number">5</span>, nil, nil&#125;</div><div class="line">	<span class="comment">//go语言中指针和对象后面都是用"."连接，在这里root.right就是指针</span></div><div class="line">	root.right.left = <span class="keyword">new</span>(treeNode)</div><div class="line">	root.left.right = createNode(<span class="number">2</span>)</div><div class="line">	root.right.left.setValue(<span class="number">4</span>)</div><div class="line">	fmt.Println(root)</div><div class="line">	fmt.Println(<span class="string">"--------------中序遍历-----------------"</span>)</div><div class="line">	root.traverse()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="number">0</span> &lt;nil&gt; &lt;nil&gt;&#125;</div><div class="line">&#123;<span class="number">3</span> <span class="number">0xc000044440</span> <span class="number">0xc000044460</span>&#125;</div><div class="line">--------------中序遍历-----------------</div><div class="line"><span class="number">0</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="number">4</span></div><div class="line"><span class="number">5</span></div></pre></td></tr></table></figure></p>
+<p>== 值接收者和指针接收者的选择： ==</p>
+<ul>
+<li>要改变内容必须使用指针接收者</li>
+<li>结构过大也考虑使用指针接收者（因为值接收者需要拷贝，影响性能）</li>
+<li>一致性：如有指针接收者，最好都是指针接收者</li>
+<li>值接收者是go语言特有</li>
+<li>值/指针接收者均可调用值/指针接收者</li>
+</ul>
+<h4 id="三、函数的封装"><a href="#三、函数的封装" class="headerlink" title="三、函数的封装"></a>三、函数的封装</h4><ul>
+<li>名字一般使用CamelCase</li>
+<li>Go中使用函数命名来实现封装，首字母大写表public，首字母小写表private</li>
+<li>Public和private都是针对包而言</li>
+</ul>
+<h5 id="3-1-包的概念"><a href="#3-1-包的概念" class="headerlink" title="3.1 包的概念"></a>3.1 包的概念</h5><ul>
+<li>每个目录下只能有一个包，包的名字可以和目录的名字不一样</li>
+<li>Main包包含可执行入口</li>
+<li>为结构定义的方法必须放在同一个包内</li>
+<li>可以是不同的文件<br>通过对现有的包结构进行重构来进行理解：<br>现在的代码文件是以这样的形式存放的：<br><img src="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A11.png" alt="Alt Text"></li>
+</ul>
+<p>tree目录下有一个node.go文件，该文件完整内容如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">节点对象，有值、左指针和右指针</span></div><div class="line"><span class="comment"> */</span></div><div class="line">type treeNode struct &#123;</div><div class="line">	value <span class="keyword">int</span></div><div class="line">	left, right *treeNode</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">go语言中没有构造函数，但是可以自定义工厂函数构造对象</span></div><div class="line"><span class="comment"> */</span></div><div class="line"> <span class="function">func <span class="title">createNode</span><span class="params">(value <span class="keyword">int</span>)</span> *treeNode </span>&#123;</div><div class="line"> 	<span class="comment">//这里返回的是一个局部变量的地址供外界使用，在go中是允许的</span></div><div class="line"> 	<span class="keyword">return</span> &amp;treeNode&#123;value: value&#125;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="comment">/**</span></div><div class="line"><span class="comment"> 为结构体定义方法</span></div><div class="line"><span class="comment"> func + (函数接收者) + 函数名</span></div><div class="line"><span class="comment"> 函数接收者可以是值接收者，也可以是指针接收者，具体选择哪个，由特定需要决定，</span></div><div class="line"><span class="comment"> 如果需要修改具体的内容，那么需要选择指针接收者</span></div><div class="line"><span class="comment"> 此处只是打印节点的值，故采用值接收者</span></div><div class="line"><span class="comment">  */</span></div><div class="line">  func (node treeNode) print()&#123;</div><div class="line">  	fmt.Println(node.value)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/**</span></div><div class="line"><span class="comment">  指针接收者</span></div><div class="line"><span class="comment">   */</span></div><div class="line">   func (node *treeNode) setValue(value <span class="keyword">int</span>)&#123;</div><div class="line">   	<span class="comment">//node虽然是指针，但是在go语言中，指针后面也是"."连接</span></div><div class="line">   	node.value = value</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="comment">/**</span></div><div class="line"><span class="comment">   遍历树：中序遍历</span></div><div class="line"><span class="comment">    */</span></div><div class="line">    func (node *treeNode) traverse() &#123;</div><div class="line">    	<span class="keyword">if</span> node == nil &#123;</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		<span class="comment">//完全不用考虑node.left可能为nil的情况，因为nil也可以调用函数，编译不会出错</span></div><div class="line">    	node.left.traverse()</div><div class="line">    	node.print()</div><div class="line">    	node.right.traverse()</div><div class="line">	&#125;</div><div class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	var root treeNode</div><div class="line">	fmt.Println(root)</div><div class="line"></div><div class="line">	<span class="comment">//创建对象的几种方法</span></div><div class="line">	root = treeNode&#123;value: <span class="number">3</span>&#125;</div><div class="line">	root.left = &amp;treeNode&#123;&#125;</div><div class="line">	root.right = &amp;treeNode&#123;<span class="number">5</span>, nil, nil&#125;</div><div class="line">	<span class="comment">//go语言中指针和对象后面都是用"."连接，在这里root.right就是指针</span></div><div class="line">	root.right.left = <span class="keyword">new</span>(treeNode)</div><div class="line">	root.left.right = createNode(<span class="number">2</span>)</div><div class="line">	root.right.left.setValue(<span class="number">4</span>)</div><div class="line">	fmt.Println(root)</div><div class="line">	fmt.Println(<span class="string">"--------------中序遍历-----------------"</span>)</div><div class="line">	root.traverse()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到“package main”。现在希望main函数单独放在一个文件中，并且将上段中关于treeNode的代码全部放入名为“tree”的包下。如果直接修改main为tree，并将main函数拷贝到tree目录下的一个新的文件，会报错。如下两图</p>
+<p><img src="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A12.png" alt="Alt Text"></p>
+<p><img src="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A13.png" alt="Alt Text"></p>
+<p>原因就是== “每个目录下只能有一个包” ==<br>需要这样做：</p>
+<ol>
+<li>将node.go文件的包名由“main”修改为“tree”，同时在tree目录下创建一个entry目录，并在entry目录下创建entry.go文件，此时包名自动为main。如图：</li>
+</ol>
+<p><img src="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A14.png" alt="Alt Text"></p>
+<p>而此时也不会在包名处报错了。</p>
+<ol>
+<li>将node.go中的main函数部分直接剪切到entry.go中，发现报了很多错。如图：</li>
+</ol>
+<p><img src="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A15.png" alt="Alt Text"></p>
+<p>原因是，“一个包无法访问到另一个包的private结构”，需要将结构改为public，方法就是将首字母改为大写。如下图：</p>
+<p><img src="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A16.png" alt="Alt Text"></p>
+<p><img src="http://ovrlh76oe.bkt.clouddn.com/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A17.png" alt="Alt Text"></p>
+<p>运行结果和原来是一样的，当然也可以将函数再另外抽出来，这里不演示了。</p>
+<h4 id="四、扩展已有类型"><a href="#四、扩展已有类型" class="headerlink" title="四、扩展已有类型"></a>四、扩展已有类型</h4><p>上面有一句话“为结构定义的方法必须在同一个包内”，那就有一个问题：如果这个包是别人写的，我们怎么扩展呢？<br>Java语言可以采用继承的方式，但是在go中，已经没有了继承这一说法。Go中对于“如何扩充系统类型或者别人的类型”采取的方法有两种：<br>1)    定义别名<br>2)    使用组合<br>“组合”的意思其实就是在一个结构中引用另外一个结构，这和Java很好类比。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+	﻿<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+      </div>
+    
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写作不易，多谢鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://ovrlh76oe.bkt.clouddn.com/1.jpg" alt="仓颉Ziv WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://ovrlh76oe.bkt.clouddn.com/2.jpg" alt="仓颉Ziv Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go编程/" rel="tag"><i class="fa fa-tag"></i> Go编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/29/Java源码/迭代器模式中的fail-fast/" rel="next" title="迭代器模式中的fail-fast">
+                <i class="fa fa-chevron-left"></i> 迭代器模式中的fail-fast
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/30/Java源码/LinkedList源码阅读/" rel="prev" title="LinkedList源码阅读笔记">
+                LinkedList源码阅读笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMDg1OS83NDA4"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/uploads/axin.jpg"
+              alt="仓颉Ziv" />
+          
+            <p class="site-author-name" itemprop="name">仓颉Ziv</p>
+            <p class="site-description motion-element" itemprop="description">且歌且行</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Birdziv" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/3790395311/profile?topnav=1&wvr=6" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      微博
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言之面向对象篇"><span class="nav-number">1.</span> <span class="nav-text">Go语言之面向对象篇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、创建对象（结构体）"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、创建对象（结构体）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、为结构体定义方法"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、为结构体定义方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、函数的封装"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、函数的封装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-包的概念"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">3.1 包的概念</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、扩展已有类型"><span class="nav-number">1.0.4.</span> <span class="nav-text">四、扩展已有类型</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span id="busuanzi_container_site_uv">
+  您是第<span id="busuanzi_value_site_uv"></span>位访客
+</span>
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">仓颉Ziv</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d2ad2c1181aaad513232100ed6cf9e2a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">我共写了29.4k字</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+  
+<!-- ҳ������С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!-- �������� -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+</body>
+</html>
